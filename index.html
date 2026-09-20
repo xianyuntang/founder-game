@@ -1,0 +1,5585 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>12 個月 · 你的公司撐得過幾個月？</title>
+<meta name="description" content="12 道選擇題，每一題的對錯都來自 2,909 位創業者的真實自述。選錯了，你的錢就少撐一個月。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="12 個月 · 你的公司撐得過幾個月？">
+<meta property="og:description" content="12 道選擇題，每一題的對錯都來自 2,909 位創業者的真實自述。選錯了，你的錢就少撐一個月。">
+<meta property="og:image" content="https://founder-game-coral.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://founder-game-coral.vercel.app/og.png">
+<!-- 自我檢查：網址後面加 #selftest（引用查核 + 平衡模擬） -->
+<style>
+/* 設計系統：Brutalism（ui-ux-pro-max --design-system 選出）
+   硬邊框、零圓角、粗字、可見網格、非對稱。色票取自 "Coin gold + prestige purple"：
+   金＝錢與跑道，紫＝有證據支持的做法，紅＝命中失敗模式。
+   刻意偏離資料集的一點：資料集寫 transition:none，這裡保留 90–180ms 的功能性轉場，
+   因為按壓回饋與狀態變化不該用瞬切（Quick Ref §2 press-feedback、§7 state-transition），
+   全部由 prefers-reduced-motion 關掉。 */
+:root{
+  color-scheme:light;
+  --paper:#FFFBEB; --paper-2:#FFFFFF; --ink:#0F172A; --ink-2:#475569;
+  --rule:#0F172A; --rule-soft:#E8DFC6;
+  --gold:#D97706; --gold-ink:#92400E; --gold-wash:#FDF3D7;
+  --violet:#7C3AED; --violet-ink:#5B21B6; --violet-wash:#F2ECFE;
+  --danger:#DC2626; --danger-ink:#991B1B; --danger-wash:#FDEBEB;
+  --on-solid:#FFFFFF;
+  --bar:#92400E; --bar-danger:#991B1B; --bar-violet:#5B21B6;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  --t-xs:12px; --t-s:14px; --t-b:16px; --t-m:19px; --t-l:26px; --t-xl:40px;
+  --sp-1:4px; --sp-2:8px; --sp-3:16px; --sp-4:24px; --sp-5:32px; --sp-6:48px;
+}
+@media (prefers-color-scheme:dark){:root{
+  color-scheme:dark;
+  --paper:#0D0C0A; --paper-2:#161310; --ink:#F5F1E6; --ink-2:#ABA493;
+  --rule:#756B58; --rule-soft:#2A251E;
+  --gold:#F0A62B; --gold-ink:#F0A62B; --gold-wash:#241B0B;
+  --violet:#A78BFA; --violet-ink:#C4B5FD; --violet-wash:#1B1530;
+  --danger:#F87171; --danger-ink:#FCA5A5; --danger-wash:#2A1414;
+  --on-solid:#0D0C0A;
+  --bar:#F0A62B; --bar-danger:#F87171; --bar-violet:#A78BFA;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:var(--t-b)/1.7 var(--sans);overflow-wrap:anywhere}
+.shell{max-width:1080px;margin:0 auto;padding:var(--sp-4) var(--sp-4) var(--sp-6)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px}
+.skip:focus{position:static;display:inline-block;margin-bottom:var(--sp-2)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+button{font:inherit;color:inherit;border-radius:0;cursor:pointer}
+a{color:var(--gold-ink)}
+.ico{flex:none;vertical-align:-2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ── 開場 ─────────────────────────────────────────────── */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp-4);
+  align-items:center;margin-bottom:var(--sp-5)}
+.hero .big{font:900 clamp(72px,16vw,150px)/.78 var(--mono);letter-spacing:-.04em;color:var(--gold)}
+.hero h1{font:900 var(--t-xl)/1.15 var(--sans);letter-spacing:-.01em;margin:0 0 var(--sp-2)}
+.hero p{margin:0;color:var(--ink-2);max-width:52ch}
+.slab{border:2px solid var(--rule);background:var(--paper-2);position:relative;
+  padding:var(--sp-4);margin:0 0 var(--sp-5)}
+.slab>.label{position:absolute;top:-1px;left:-1px;background:var(--ink);color:var(--paper);
+  font:700 var(--t-xs)/1 var(--mono);letter-spacing:.14em;padding:6px 10px;text-transform:uppercase}
+.slab ul{margin:var(--sp-3) 0 0;padding-left:1.15em}
+.slab li{margin:0 0 var(--sp-1);color:var(--ink-2);font-size:var(--t-s)}
+.slab li strong{color:var(--ink)}
+h2.sec{font:800 var(--t-l)/1.2 var(--sans);letter-spacing:-.01em;margin:0 0 var(--sp-3)}
+.startnote{color:var(--ink-2);font-size:var(--t-s);max-width:56ch;margin:var(--sp-4) 0 0}
+.share textarea{width:100%;margin:var(--sp-3) 0 0;background:var(--paper);color:var(--ink);
+  border:2px solid var(--rule);padding:var(--sp-3);resize:vertical;
+  font:var(--t-s)/1.7 var(--sans);border-radius:0}
+.share .row{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin-top:var(--sp-3)}
+.share .ghost{display:inline-flex;align-items:center;gap:var(--sp-2);background:transparent;
+  color:var(--ink);border:2px solid var(--rule);padding:12px var(--sp-4);font-weight:800;
+  min-height:44px;text-decoration:none;
+  transition:transform .09s ease-out,box-shadow .09s ease-out}
+.share .ghost:hover,.share .ghost:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+.share .ghost:active{transform:none;box-shadow:none}
+.share .said{font:500 var(--t-xs)/1.6 var(--mono);color:var(--violet-ink)}
+.next.big{font-size:var(--t-m);padding:16px var(--sp-5)}
+.rail .tk{border-bottom:2px solid var(--rule);padding-bottom:var(--sp-2);margin-bottom:var(--sp-3)}
+.rail .tk b{display:block;font:800 var(--t-m)/1.3 var(--sans)}
+.rail .tk span{display:block;font-size:var(--t-xs);color:var(--ink-2);line-height:1.5}
+
+/* ── 回合：左側狀態軌 + 右側舞台 ───────────────────────── */
+.round-grid{display:grid;grid-template-columns:268px minmax(0,1fr);gap:var(--sp-3);align-items:start}
+.rail{border:2px solid var(--rule);background:var(--paper-2);padding:var(--sp-3);
+  position:sticky;top:var(--sp-3)}
+.ticker{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-bottom:var(--sp-2)}
+.ticker i{display:block;height:10px;background:var(--rule-soft);transition:background .2s}
+.ticker i.on{background:var(--ink)}
+.ticker i.now{background:var(--gold)}
+.rail .mo{font:700 var(--t-xs)/1 var(--mono);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-2);margin:0 0 var(--sp-3)}
+.stat{display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-2);
+  padding:var(--sp-2) 0;border-top:1px solid var(--rule-soft)}
+.stat span{font:500 var(--t-xs)/1.4 var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-2)}
+.stat b{font:800 var(--t-m)/1 var(--mono);font-variant-numeric:tabular-nums}
+.flash{min-height:26px;display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
+  padding-top:var(--sp-2);font:700 var(--t-xs)/1.5 var(--mono);font-variant-numeric:tabular-nums}
+.flash.on{animation:flash 2s ease-out forwards}
+.flash .up{color:var(--violet-ink)} .flash .down{color:var(--danger-ink)}
+.flash .tag2{color:var(--ink-2);font-weight:500;letter-spacing:.1em}
+@keyframes flash{0%{opacity:0;transform:translateY(8px)}
+  12%{opacity:1;transform:none} 72%{opacity:1;transform:none} 100%{opacity:0}}
+.rail .runway{border-top:2px solid var(--rule);margin-top:var(--sp-2);padding-top:var(--sp-3)}
+.rlabel{display:block;font:500 var(--t-xs)/1.4 var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-2)}
+.rail .runway .big{font:900 var(--t-xl)/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--gold)}
+.rail .runway.low .big{color:var(--gold)}
+.rail .runway.crit .big{color:var(--danger)}
+.bar{height:10px;background:var(--rule-soft);margin:var(--sp-2) 0}
+.bar>i{display:block;height:100%;background:var(--bar);transition:width .3s ease-out}
+.runway.crit .bar>i{background:var(--bar-danger)}
+.math{font:500 var(--t-xs)/1.6 var(--mono);font-variant-numeric:tabular-nums;
+  color:var(--ink-2);margin:0}
+.math em{font-style:normal;color:var(--ink)}
+
+.stage{min-width:0}
+.warn{display:flex;gap:var(--sp-2);background:var(--danger-wash);border:2px solid var(--danger);
+  color:var(--danger-ink);padding:var(--sp-2) var(--sp-3);font-size:var(--t-s);
+  font-weight:600;margin:0 0 var(--sp-3)}
+.scene-block{border:2px solid var(--rule);background:var(--paper-2);
+  padding:var(--sp-4);margin:0 0 var(--sp-3)}
+.scene-title{font:800 var(--t-l)/1.3 var(--sans);letter-spacing:-.01em;margin:0 0 var(--sp-3);
+  max-width:24ch;text-wrap:balance}
+.scene{white-space:pre-line;margin:0;max-width:60ch;color:var(--ink)}
+.opts{display:grid;gap:var(--sp-2)}
+.opt{display:grid;grid-template-columns:32px minmax(0,1fr);gap:var(--sp-3);align-items:start;
+  width:100%;text-align:left;background:var(--paper-2);border:2px solid var(--rule);
+  padding:13px var(--sp-3);min-height:52px;
+  transition:transform .09s ease-out,box-shadow .09s ease-out}
+.opt:hover,.opt:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--violet)}
+.opt:active{transform:none;box-shadow:none}
+.opt[disabled]{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.opt kbd{font:700 var(--t-s)/30px var(--mono);height:30px;text-align:center;
+  background:var(--ink);color:var(--paper)}
+
+/* ── 回饋卡 ───────────────────────────────────────────── */
+.fb{border:2px solid var(--rule);border-left-width:10px;background:var(--paper-2);
+  margin-top:var(--sp-3);animation:rise .18s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fb.good{border-left-color:var(--violet)}
+.fb.ok{border-left-color:var(--gold)}
+.fb.bad,.fb.kill{border-left-color:var(--danger)}
+.fb-head{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-4);
+  border-bottom:2px solid var(--rule);font:800 var(--t-b)/1 var(--sans)}
+.fb.good .fb-head{color:var(--violet-ink);background:var(--violet-wash)}
+.fb.ok .fb-head{color:var(--gold-ink);background:var(--gold-wash)}
+.fb.bad .fb-head,.fb.kill .fb-head{color:var(--danger-ink);background:var(--danger-wash)}
+.fb-body{padding:var(--sp-4)}
+.deltas{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));
+  gap:var(--sp-2);margin:0 0 var(--sp-4)}
+.delta{border:1px solid var(--rule-soft);padding:var(--sp-2)}
+.delta span{display:block;font:500 var(--t-xs)/1.4 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-2)}
+.delta b{font:800 var(--t-m)/1.2 var(--mono);font-variant-numeric:tabular-nums}
+.delta b.up{color:var(--violet-ink)} .delta b.down{color:var(--danger-ink)}
+.pat{margin:0}
+.pat .chap{font:700 var(--t-xs)/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-2);margin:0 0 var(--sp-2)}
+.pat .pname{font:800 var(--t-m)/1.4 var(--sans);margin:0 0 var(--sp-3)}
+.scale{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp-3);
+  align-items:center;margin:0 0 var(--sp-2)}
+.scale .n{font:900 var(--t-xl)/1 var(--mono);font-variant-numeric:tabular-nums}
+.fb.bad .scale .n,.fb.kill .scale .n{color:var(--danger-ink)}
+.fb.good .scale .n,.fb.ok .scale .n{color:var(--violet-ink)}
+.scale .meta{font-size:var(--t-s);color:var(--ink-2)}
+.scale .track2{height:8px;background:var(--rule-soft);margin-top:var(--sp-1)}
+.scale .track2 i{display:block;height:100%;background:var(--bar-danger)}
+.fb.good .scale .track2 i,.fb.ok .scale .track2 i{background:var(--bar-violet)}
+.caution{display:flex;gap:var(--sp-2);border:1px solid var(--gold);background:var(--gold-wash);
+  color:var(--gold-ink);padding:var(--sp-2) var(--sp-3);font-size:var(--t-s);margin:var(--sp-3) 0 0}
+.cases{list-style:none;margin:var(--sp-3) 0 0;padding:0}
+.case{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp-3);
+  border-top:1px solid var(--rule-soft);padding:var(--sp-2) 0;font-size:var(--t-s)}
+.case a{font-family:var(--mono);font-size:var(--t-xs);white-space:nowrap;
+  display:inline-flex;align-items:center;gap:4px;text-decoration:none;border-bottom:1px solid currentColor}
+.case span{color:var(--ink-2)}
+.lesson{font-size:var(--t-s);color:var(--ink);border-left:3px solid var(--rule-soft);
+  padding-left:var(--sp-3);margin:var(--sp-3) 0 0}
+.origin{font:500 var(--t-xs)/1.6 var(--mono);color:var(--ink-2);margin:var(--sp-3) 0 0}
+.next{display:inline-flex;align-items:center;gap:var(--sp-2);background:var(--ink);
+  color:var(--paper);border:2px solid var(--ink);padding:12px var(--sp-4);
+  font-weight:800;margin:var(--sp-4) 0 0;min-height:44px;
+  transition:transform .09s ease-out,box-shadow .09s ease-out}
+.next:hover,.next:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+.next:active{transform:none;box-shadow:none}
+
+/* ── 結局 ─────────────────────────────────────────────── */
+.verdict{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp-4);align-items:center;
+  border:2px solid var(--rule);background:var(--paper-2);padding:var(--sp-4);margin:0 0 var(--sp-3)}
+.verdict .g{font:900 clamp(52px,10vw,86px)/.8 var(--mono);text-align:center;
+  border:3px solid var(--rule);padding:var(--sp-3) var(--sp-2);min-width:1.7em}
+.verdict.dead .g{color:var(--danger);border-color:var(--danger)}
+.verdict.win .g{color:var(--gold);border-color:var(--gold)}
+.verdict h3{font:800 var(--t-l)/1.25 var(--sans);letter-spacing:-.01em;margin:0 0 var(--sp-2)}
+.verdict p{margin:0;color:var(--ink-2)}
+.finals{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;
+  background:var(--rule);border:2px solid var(--rule);margin:var(--sp-3) 0 0}
+.finals div{background:var(--paper-2);padding:var(--sp-2) var(--sp-3)}
+.finals span{display:block;font:500 var(--t-xs)/1.4 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-2)}
+.finals b{font:800 var(--t-m)/1.2 var(--mono);font-variant-numeric:tabular-nums}
+.tally{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-3);margin:0 0 var(--sp-3)}
+.tally div{border:2px solid var(--rule);background:var(--paper-2);padding:var(--sp-3)}
+.tally b{display:block;font:900 var(--t-xl)/1 var(--mono)}
+.tally.hit b{color:var(--danger-ink)} .tally .win b{color:var(--violet-ink)}
+.tally span{font:500 var(--t-xs)/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.wins{list-style:none;margin:0;padding:0}
+.wins li{border-top:1px solid var(--rule-soft);padding:var(--sp-2) 0;font-size:var(--t-s)}
+.wins .how{display:block;color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);margin-top:2px}
+.log{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:46px 18px minmax(0,1fr);gap:var(--sp-3);
+  border-top:1px solid var(--rule-soft);padding:var(--sp-3) 0}
+.log .mo2{font:700 var(--t-xs)/1.7 var(--mono);color:var(--ink-2)}
+.log .qt{display:block;font-size:var(--t-xs);color:var(--ink-2);margin-bottom:2px}
+.log .pt{display:block;font:500 var(--t-xs)/1.6 var(--mono);color:var(--ink-2);margin-top:3px}
+.log .good{color:var(--violet-ink)} .log .bad{color:var(--danger-ink)} .log .ok{color:var(--ink-2)}
+pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:var(--paper-2);
+  border:2px solid var(--rule);padding:var(--sp-3);overflow:auto}
+footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-height:1.7;
+  border-top:2px solid var(--rule);margin-top:var(--sp-6);padding-top:var(--sp-3)}
+
+@media(max-width:900px){
+  .round-grid{grid-template-columns:minmax(0,1fr)}
+  .rail{position:static}
+  .hero{grid-template-columns:minmax(0,1fr);gap:var(--sp-2)}
+}
+@media(max-width:640px){
+  .shell{padding:var(--sp-3) var(--sp-3) var(--sp-5)}
+  .tally{grid-template-columns:minmax(0,1fr)}
+  .scene-block{padding:var(--sp-3)}
+  .fb-body{padding:var(--sp-3)}
+  .verdict{grid-template-columns:minmax(0,1fr);gap:var(--sp-3)}
+  .verdict .g{justify-self:start;min-width:0;padding:var(--sp-2) var(--sp-4)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important}
+  .opt:hover,.opt:focus-visible,.next:hover,.next:focus-visible{transform:none}
+  /* animation-duration 被壓成 .01ms 後，forwards 會停在 opacity:0，變化行等於沒出現。
+     關掉動畫、維持可見，改由那個 2 秒 timeout 收掉。 */
+  .flash.on{animation:none!important;opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+<div class="shell">
+<main id="main">
+
+<section id="start" aria-labelledby="start-h">
+  <div class="hero">
+    <div class="big" aria-hidden="true">12</div>
+    <div>
+      <h1 id="start-h">每個月一個決定。<br>錢燒完，公司倒閉。</h1>
+      <p>12 道選擇題，大約 6 分鐘。選錯了，你會看到有多少人踩過同一個坑，以及他們的 Reddit 原文。</p>
+    </div>
+  </div>
+
+  <button type="button" class="next big" id="startBtn"></button>
+  <p class="startnote">資料是 2,909 位創業者在 Reddit 上未經查證的自述。人數只能比多寡，不是機率。</p>
+</section>
+
+<section id="round" aria-labelledby="round-h" hidden>
+  <h2 id="round-h" class="sr">本月決定</h2>
+  <div class="round-grid">
+    <aside class="rail" id="rail" role="status" aria-live="polite"></aside>
+    <div class="stage">
+      <div id="warnBox"></div>
+      <div class="scene-block">
+        <p class="scene-title" id="sceneTitle"></p>
+        <p class="scene" id="scene"></p>
+      </div>
+      <div class="opts" id="opts"></div>
+    </div>
+  </div>
+</section>
+
+<section id="ending" aria-labelledby="ending-h" hidden>
+  <h2 id="ending-h" class="sr">結局</h2>
+  <div id="endBody"></div>
+</section>
+
+<section id="selftest" aria-labelledby="st-h" hidden>
+  <h2 id="st-h" class="sec">自我檢查</h2>
+  <pre id="stOut"></pre>
+</section>
+
+</main>
+
+<noscript><p>本頁需要 JavaScript。所有判定依據來自 <code>playbook.md</code>（93 個失敗模式）與 <code>success-playbook.md</code>（35 個成功模式），可直接閱讀。</p></noscript>
+
+<footer>
+  資料範圍 2025-01 至 2026-09，4,999 篇 Reddit 貼文、3,614 個可用事件、2,909 位當事人。案例 ID 可點開回查原文。
+</footer>
+</div>
+<script type="application/json" id="bank">
+{
+ "tracks": {
+  "ai": {
+   "name": "AI 包裝層",
+   "sub": "套 API 做工具，工具訂閱與推論成本一起燒",
+   "cash": 11000,
+   "users": 0,
+   "mrr": 0,
+   "fixed": 1400,
+   "churn": 12,
+   "unit": 0.6,
+   "fixedNote": "生活費 $700 + 模型、雲端與 AI 工具訂閱 $700"
+  },
+  "b2b": {
+   "name": "B2B SaaS",
+   "sub": "辭職全職做，成交慢、客單價高",
+   "cash": 16000,
+   "users": 0,
+   "mrr": 0,
+   "fixed": 1600,
+   "churn": 5,
+   "unit": 0.15,
+   "fixedNote": "生活費 $1,300 + 工具與雲端 $300"
+  },
+  "b2c": {
+   "name": "消費者 App",
+   "sub": "辭職全職做，用戶來得快走得更快",
+   "cash": 9000,
+   "users": 0,
+   "mrr": 0,
+   "fixed": 900,
+   "churn": 18,
+   "unit": 0.25,
+   "fixedNote": "生活費 $700 + 雲端與上架 $200"
+  },
+  "agency": {
+   "name": "接案轉產品",
+   "sub": "有案子養著，但時間全被吃掉",
+   "cash": 6000,
+   "users": 12,
+   "mrr": 800,
+   "fixed": 1400,
+   "churn": 6,
+   "unit": 0.2,
+   "fixedNote": "生活費 $1,100 + 工具 $300"
+  }
+ },
+ "draws": {
+  "1": 3,
+  "2": 4,
+  "3": 3,
+  "4": 2
+ },
+ "phaseNames": {
+  "1": "驗證與需求",
+  "2": "獲客",
+  "3": "啟用、轉換與定價",
+  "4": "留存、執行與外部依賴"
+ },
+ "questions": [
+  {
+   "id": "v-closed-door",
+   "phase": 1,
+   "title": "寫了十一週，產品還沒給任何人看過",
+   "scene": "你已經寫了十一週。功能清單還剩三項沒做完，你告訴自己「做完再說」。\n這週有人在社群問了一句很像你在解的需求。你沒有回。",
+   "options": [
+    {
+     "text": "把剩下三項做完再上線，反正快好了",
+     "tier": "bad",
+     "d": {
+      "cash": -200
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式1",
+      "n": 85,
+      "name": "閉門開發數月到數年，上線前從未和潛在用戶談過",
+      "cases": [
+       [
+        "1ng8hqk:F1",
+        "SaaS 新手花 6 個月複製 text-to-buy 概念到歐洲，上線後「完全的零」；另一次 2,000 人候"
+       ],
+       [
+        "1ugomuc:F2",
+        "B2B 專案管理工具投入 47,000 美元，建了 9 個月才訪談，發現 8/10 用試算表且無預算"
+       ]
+      ]
+     },
+     "lesson": "AI 時代建置不是瓶頸，知道該建什麼才是"
+    },
+    {
+     "text": "丟到社群和朋友群組問「這點子如何」",
+     "tier": "bad",
+     "d": {
+      "cash": -100,
+      "users": 15
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式9",
+      "n": 18,
+      "name": "把訪談、問卷、親友與 beta 的好話當成驗證",
+      "cases": [
+       [
+        "1skp96v:F1",
+        "每次都做訪談驗證、獲得正面反應，每次完成後都沒有付費客戶"
+       ],
+       [
+        "1s0cp3b:F1",
+        "依受訪者「願意付費」的說法建了兩個 MVP，合計收入為零"
+       ]
+      ]
+     },
+     "lesson": "問卷和點讚無法預測真實購買行為"
+    },
+    {
+     "text": "停下開發，去找 10 個有這問題的陌生人一對一談",
+     "tier": "good",
+     "d": {
+      "cash": -150
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式4",
+      "n": 12,
+      "up": 3,
+      "name": "親自和早期使用者一對一對話（訪談、通話、私訊），而非發問卷",
+      "caution": "DesignQA 作者訪談 40+ 位設計師與 PM 得到正面回饋，產品上線後使用量極低、幾乎沒有用戶實際使用",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：找已為爛方案付費的 15 人談，達到 sustained_revenue（$6k–$28k MRR）"
+       ]
+      ]
+     },
+     "lesson": "訪談能驗證「這是個問題」，不保證能驗證「他們會為此付費」"
+    },
+    {
+     "text": "先架一個只有付款按鈕的落地頁，設「一週 100 人才動工」的門檻",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 40
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式2",
+      "n": 10,
+      "up": 4,
+      "name": "先用等待名單／只有付款按鈕的落地頁測試，再決定要不要寫程式",
+      "caution": "GentleInvoice 持續與潛在與現有客戶通話詢問痛點，MRR 仍卡在 $250 好幾個月未能突破",
+      "cases": [
+       [
+        "1qlglwd:C1",
+        "VideoYards：等待名單門檻 100+ 人才開始構建，兩個月內獲利並出售"
+       ],
+       [
+        "1lshpi0:C1",
+        "Rivin.ai：Stripe 按鈕落地頁測試，一週無反應就放棄"
+       ]
+      ]
+     },
+     "lesson": "寫程式之前先設一個具體、量化的「值不值得做」門檻"
+    }
+   ]
+  },
+  {
+   "id": "v-waitlist",
+   "phase": 1,
+   "title": "候補名單 612 人",
+   "scene": "你寄了信：「開放付費了。」\n48 小時過去。0 筆。",
+   "options": [
+    {
+     "text": "再等等，大家可能在忙",
+     "tier": "bad",
+     "d": {
+      "cash": -150
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式2",
+      "n": 45,
+      "name": "有註冊、有稱讚、有候補名單，但掛上價格後沒人付錢",
+      "cases": [
+       [
+        "1vros67:F1",
+        "TikTok 8D 音訊工具：10k 訪客、900 註冊、0 付費，全職 7–8 個月靠開 Uber 付房租"
+       ],
+       [
+        "1jlc8vm:F1",
+        "75+ 人候補名單、一週做出 MVP，寄出付款連結後無人通話或付款"
+       ]
+      ]
+     },
+     "lesson": "「驗證不只是問人們會不會付錢，而是觀察當你掛上價格標籤時他們實際的行為」"
+    },
+    {
+     "text": "加開一個很慷慨的免費方案，先把人養起來",
+     "tier": "bad",
+     "d": {
+      "cash": -100,
+      "users": 120,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式6",
+      "n": 7,
+      "name": "免費太久、起步不敢收費，之後很難再要求用戶付費",
+      "cases": [
+       [
+        "1nspmh8:F4",
+        "消費者產品獲得大量讚美卻零收入，同期經營的 B2B 工作流軟體 8 個月做到 $15k MRR"
+       ],
+       [
+        "1utpefk:F1",
+        "一站式 App 累計投入逾 2,500 小時，後才領悟用戶不會因投入工時而付費"
+       ]
+      ]
+     },
+     "lesson": "用戶不會因為你投入多少工時而付費，只衡量他們得到的價值值不值得"
+    },
+    {
+     "text": "打給最早報名的 20 個人，問他們為什麼沒付",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": 10
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式4",
+      "n": 12,
+      "up": 3,
+      "name": "親自和早期使用者一對一對話（訪談、通話、私訊），而非發問卷",
+      "caution": "DesignQA 作者訪談 40+ 位設計師與 PM 得到正面回饋，產品上線後使用量極低、幾乎沒有用戶實際使用",
+      "cases": [
+       [
+        "1s86kkk:C1",
+        "FeedbackQueue：構思階段與 3,300+ 人面對面溝通，3 週轉化 414 人，後達 profitability"
+       ]
+      ]
+     },
+     "lesson": "候補名單是注意力，不是需求"
+    },
+    {
+     "text": "去翻競品的 G2／Capterra 一星負評，看這群人真正在抱怨什麼",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 20
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式5",
+      "n": 10,
+      "up": 2,
+      "name": "從 Reddit／論壇／G2、Capterra 負評裡挖已經存在的抱怨，而非憑空發想",
+      "caution": "這批人本身就是倖存者，讀抱怨挑題只是提高了勝率，不是保證",
+      "cases": [
+       [
+        "1sai8o6:C1",
+        "未命名 SaaS：靠讀 G2/Capterra 負評 + 冷 DM 找到付費客戶，達 $9,000 MRR"
+       ],
+       [
+        "1ocwlw8:C1",
+        "寫程式前讀 2 週 Reddit/Twitter 抱怨，做出 7 款小工具"
+       ]
+      ]
+     },
+     "lesson": "已經有人在付錢罵的東西，比沒人討論的東西安全"
+    }
+   ]
+  },
+  {
+   "id": "v-own-itch",
+   "phase": 1,
+   "title": "這是你自己每天都在用的工具",
+   "scene": "你解決了自己的問題。你每天用它。\n你很確定別人也需要——雖然你還沒問過任何人。",
+   "options": [
+    {
+     "text": "繼續做，你就是第一個用戶",
+     "tier": "bad",
+     "d": {
+      "cash": -250
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式3",
+      "n": 35,
+      "name": "為自己（或「酷」點子）而做，別人沒有同樣的問題",
+      "cases": [
+       [
+        "1qp6mek:F1",
+        "15 年經驗開發者花 12 個月做 B2C 預算 App，上線一年總用戶 1 人"
+       ],
+       [
+        "1rrlhlr:F1",
+        "9 個月 4 個產品總收入 0 美元，全是自己的日常小煩惱"
+       ]
+      ]
+     },
+     "lesson": "「『這很煩』與『我願意付錢解決』是完全不同的兩件事」"
+    },
+    {
+     "text": "發一則 Twitter 問「有人也有這個問題嗎」",
+     "tier": "bad",
+     "d": {
+      "cash": -50,
+      "users": 25,
+      "churn": 2
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式9",
+      "n": 18,
+      "name": "把訪談、問卷、親友與 beta 的好話當成驗證",
+      "cases": [
+       [
+        "1skp96v:F1",
+        "每次都做訪談驗證、獲得正面反應，每次完成後都沒有付費客戶"
+       ],
+       [
+        "1s0cp3b:F1",
+        "依受訪者「願意付費」的說法建了兩個 MVP，合計收入為零"
+       ]
+      ]
+     },
+     "lesson": "先找「已經在為粗糙解法付費的人」再開始建產品"
+    },
+    {
+     "text": "找 5 個已經在用爛方法硬撐的人，直接問要不要買",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "users": 8,
+      "mrr": 90
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式7",
+      "n": 8,
+      "up": 3,
+      "name": "冷外聯（冷 DM／冷 Email／LinkedIn）鎖定已知有需求或在用競品的人",
+      "caution": "GentleInvoice 作者持續與新加坡會計事務所接觸、安排通話詢問痛點，收入仍停滯在 $250 MRR 好幾個月",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 B2B SaaS：逐一致電 200+ 企業找出未使用方案者，4 年後以 600 萬美元出售"
+       ],
+       [
+        "1j0w1ys:C1",
+        "未命名 B2B（律師／公證人）：寄實體包裹開發信，90 天內鎖定 50 萬瑞郎合約"
+       ]
+      ]
+     },
+     "lesson": "你自己有這個問題只證明樣本數 1"
+    },
+    {
+     "text": "先手工幫三個人做一次，收錢，之後再想自動化",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 3,
+      "mrr": 140
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式8",
+      "n": 8,
+      "up": 3,
+      "name": "先用人工、不可規模化的方式服務最初幾位客戶，之後才自動化",
+      "caution": "這是早期少量客戶時才可行的做法，規模擴大後仍堅持高接觸服務會拖慢成長速度",
+      "cases": [
+       [
+        "1md4hd3:C3",
+        "未命名 SaaS：先在自家企業內部測試、第一年僅靠熟人拿 5 位客戶，後達 ARR $1M"
+       ],
+       [
+        "1jv1ph6:C1",
+        "Superwrapper：獲得足夠用戶後才安排訪談，一個月內轉為獲利"
+       ]
+      ]
+     },
+     "lesson": "手工做一次，你會知道自動化該自動化哪一段"
+    }
+   ]
+  },
+  {
+   "id": "v-nice-to-have",
+   "phase": 1,
+   "title": "「有它不錯」",
+   "scene": "回饋都很正面。「蠻方便的」「設計很漂亮」「我有空會用」。\n沒有一個人說「沒有它我會死」。",
+   "options": [
+    {
+     "text": "加更多功能，把它從「不錯」變成「必需」",
+     "tier": "bad",
+     "d": {
+      "cash": -600
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式5",
+      "n": 18,
+      "name": "完美主義／過度工程化，遲遲不上線或不斷堆疊功能",
+      "cases": [
+       [
+        "1puka7a:F2",
+        "花9個月過度工程化打造法國市場的公司管理與差旅優化工具，推廣一個月後仍沒有用戶"
+       ],
+       [
+        "1koxlea:F1",
+        "1.5年內推出4個不同SaaS，過度堆疊功能導致上線延遲、用戶少且無營收"
+       ]
+      ]
+     },
+     "lesson": "如果不是解決一個痛苦的問題，事情會比你想的難 10 倍"
+    },
+    {
+     "text": "降價，讓它便宜到不用考慮",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 60,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ],
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶，LTV:CAC 僅 1.4，漲到 $49 後升至 3.1"
+       ]
+      ]
+     },
+     "lesson": "低價不會降低摩擦，反而吸引錯誤的客戶"
+    },
+    {
+     "text": "改問客戶「上週什麼東西壞了，而這個產品本來可以擋住」",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": 12,
+      "mrr": 80
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "需求／價值不足",
+      "pat": "模式4",
+      "n": 33,
+      "name": "痛點不夠痛——nice-to-have，不是 must-have",
+      "cases": [
+       [
+        "1s5qk7k:F1",
+        "Bloort.ai 白牌聊天機器人做了 12 個月，10 次安裝、$0 收入，自評「有它不錯但非必需」"
+       ],
+       [
+        "1srnaxj:F1",
+        "下班後開發 7 個月，MRR 從未超過 100 美元，「很酷」而非「願意立刻付費」"
+       ]
+      ]
+     },
+     "lesson": "停止展示功能，改問客戶上週什麼壞掉了，以過濾好奇者與真正有痛點者"
+    },
+    {
+     "text": "同一個產品，換一群痛到會流血的人賣",
+     "tier": "good",
+     "d": {
+      "cash": -200,
+      "users": 6,
+      "mrr": 160,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群從建築 PM 換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ],
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師（流失率 2.1% vs 健身教練 8.3%）"
+       ]
+      ]
+     },
+     "lesson": "同樣的產品，換一群人賣，流失率可以差四倍"
+    }
+   ]
+  },
+  {
+   "id": "v-crowded",
+   "phase": 1,
+   "title": "這個類別已經有 40 個競品",
+   "scene": "其中 3 個有 VC 撐腰，2 個是你每天都看到的廣告。\n你打算做一個「更好的版本」。",
+   "options": [
+    {
+     "text": "做得比他們都全面，功能一個不少",
+     "tier": "bad",
+     "d": {
+      "cash": -700
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式6",
+      "n": 22,
+      "name": "跳進擁擠紅海，卻說不出用戶為何要換過來",
+      "cases": [
+       [
+        "1kmh8gp:F1",
+        "Mailhub 交易郵件 API：潛在用戶已有 Resend、Loops，一個月 2 個付費客戶"
+       ],
+       [
+        "1p1y2p0:F2",
+        "翻譯 App 花數月開發上架，只有 1 位付費用戶"
+       ]
+      ]
+     },
+     "lesson": "極度收窄：鎖定一個具體買家、一個痛點、一個用戶轉向的明確理由"
+    },
+    {
+     "text": "換一個完全沒人在做的冷門領域",
+     "tier": "bad",
+     "d": {
+      "cash": -400,
+      "users": 5
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式10",
+      "n": 12,
+      "name": "市場或利基本身太小，有天花板",
+      "cases": [
+       [
+        "1rpa3d7:F1",
+        "三年總營收 412,000 美元、峰值 MRR 18,000，因市場太小、成長太慢而關閉"
+       ],
+       [
+        "1sb1uf0:F2",
+        "遠距情侶／軍人利基天然流失，後轉型為峰值 500 萬用戶的影片播放器"
+       ]
+      ]
+     },
+     "lesson": "「無競品也可能意味著無人搜尋該問題」"
+    },
+    {
+     "text": "鎖定正在用競品、但卡在某一件事上的人",
+     "tier": "good",
+     "d": {
+      "cash": -180,
+      "users": 15,
+      "mrr": 180
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式10",
+      "n": 7,
+      "up": 3,
+      "name": "選擇已經有人付費的擁擠市場，鎖定正在用競品但卡關的人，而非找無人競爭的藍海",
+      "caution": "即使切入已驗證的市場，也可能只拿到大量免費註冊而非付費客戶",
+      "cases": [
+       [
+        "1lnc1ap:C1",
+        "MarzipanReal8045：針對 3 個現有競爭對手做微小轉向的 B2B SaaS，兩年前以 1.1 億美元出售"
+       ],
+       [
+        "1spnx02:C1",
+        "PostPeer／CaptureKit 系列：靠搜尋競爭對手驗證利基市場存在"
+       ]
+      ]
+     },
+     "lesson": "有競爭代表有人付錢，問題只剩「為什麼是你」"
+    },
+    {
+     "text": "只做大廠懶得做的那一小塊",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "users": 10,
+      "mrr": 130,
+      "churn": -1
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式8",
+      "n": 6,
+      "up": 3,
+      "name": "深耕小眾利基，避開跟大型玩家的正面競爭",
+      "caution": "這些案例的收入規模普遍偏小，多在數十到數千美元 MRR，資料中沒有出現深耕小眾後規模化到企業級收入的同類",
+      "cases": [
+       [
+        "1ssvm2r:C8",
+        "Bank Statement Converter：專做銀行對帳單轉檔給記帳員／會計師，29 名付費客戶"
+       ],
+       [
+        "1oabnmd:C5",
+        "避開企業級市場專注中小企業，5 年無會議自助式獲利"
+       ]
+      ]
+     },
+     "lesson": "小到大廠不想進來，大到養得活一個人"
+    }
+   ]
+  },
+  {
+   "id": "v-icp",
+   "phase": 1,
+   "title": "「誰是你的客戶？」",
+   "scene": "「呃……中小企業吧。其實任何需要這個的人都可以用。」\n你講完自己也覺得怪怪的。",
+   "options": [
+    {
+     "text": "先做出來，客群之後自然會浮現",
+     "tier": "bad",
+     "d": {
+      "cash": -500
+     },
+     "ref": {
+      "ch": "找錯買家",
+      "pat": "模式1",
+      "n": 25,
+      "name": "ICP 只存在腦中——賣給「所有人」等於賣給沒有人",
+      "cases": [
+       [
+        "1riyy2c:F1",
+        "前 8 個產品對客戶只有模糊族群概念，有些確實有用但從未售出"
+       ],
+       [
+        "1l4t2lr:F1",
+        "B2B 試圖賣給所有企業約兩年，幾乎零銷售"
+       ]
+      ]
+     },
+     "lesson": "分發問題只是症狀，根本原因是對銷售對象的畫像不夠清晰"
+    },
+    {
+     "text": "買 $600 廣告測水溫，看誰會點",
+     "tier": "bad",
+     "d": {
+      "cash": -600,
+      "users": 90,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式2",
+      "n": 11,
+      "name": "付費廣告的 CAC／CPA 超過客單價或 LTV，廣告數學不成立",
+      "cases": [
+       [
+        "1ll8wjw:F1",
+        "目標受眾精準、用戶真實，但 LTV 仍遠低於每安裝 $2–12 的獲客成本"
+       ],
+       [
+        "1v55qt5:F5",
+        "付費廣告的 CAC 達首年收入的多倍，單位經濟模型未跑通"
+       ]
+      ]
+     },
+     "lesson": "如果免費管道都拿不到使用者，付費廣告也做不到"
+    },
+    {
+     "text": "指名一個具體的人：他上週搜尋了什麼、現在用什麼權宜解法",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 8,
+      "mrr": 70
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "找錯買家",
+      "pat": "模式1",
+      "n": 25,
+      "name": "ICP 只存在腦中——賣給「所有人」等於賣給沒有人",
+      "cases": [
+       [
+        "1riyy2c:F1",
+        "前 8 個產品對客戶只有模糊族群概念，有些確實有用但從未售出"
+       ],
+       [
+        "1l4t2lr:F1",
+        "B2B 試圖賣給所有企業約兩年，幾乎零銷售"
+       ]
+      ]
+     },
+     "lesson": "「若沒有截圖、憤怒信件或論壇抱怨等證據，就視為假問題」"
+    },
+    {
+     "text": "挑一個你本來就有人脈的產業，從認識的人開始",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 6,
+      "mrr": 200
+     },
+     "tracks": [
+      "b2b",
+      "agency",
+      "ai"
+     ],
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式7",
+      "n": 12,
+      "up": 5,
+      "name": "靠既有人脈、產業關係或口碑推薦拿到最初（甚至全部）B2B 客戶",
+      "caution": "作者明確承認前 5–10 位客戶雖然來自認識的人，但這種方式「無法規模化，並非增長策略」",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 SaaS 新創：靠有銷售背景的共同創辦人＋產業內部關係拿到經銷合約，4 年後以 $600 萬出售"
+       ],
+       [
+        "1t2f4qc:C1",
+        "B2B SaaS marketplace plugin（oalbrecht）：幾乎不做行銷，客戶全靠應用市場自然"
+       ]
+      ]
+     },
+     "lesson": "人脈拿得到前 10 個客戶，拿不到第 100 個"
+    }
+   ]
+  },
+  {
+   "id": "v-perfection",
+   "phase": 1,
+   "title": "你還在重構",
+   "scene": "「架構要先弄好，不然以後會很痛苦。」\n你上一次跟使用者說話是什麼時候？",
+   "options": [
+    {
+     "text": "繼續重構，地基最重要",
+     "tier": "bad",
+     "d": {
+      "cash": -450
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式5",
+      "n": 18,
+      "name": "完美主義／過度工程化，遲遲不上線或不斷堆疊功能",
+      "cases": [
+       [
+        "1puka7a:F2",
+        "花9個月過度工程化打造法國市場的公司管理與差旅優化工具，推廣一個月後仍沒有用戶"
+       ],
+       [
+        "1koxlea:F1",
+        "1.5年內推出4個不同SaaS，過度堆疊功能導致上線延遲、用戶少且無營收"
+       ]
+      ]
+     },
+     "lesson": "投入數月打造複雜產品，實際推廣期卻只有短短一個月"
+    },
+    {
+     "text": "同時開一個新專案換換腦袋",
+     "tier": "bad",
+     "d": {
+      "cash": -350,
+      "fixed": 80
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式6",
+      "n": 12,
+      "name": "同時經營多個專案、不斷追逐新點子，樣樣做不好",
+      "cases": [
+       [
+        "1i0d34r:F1",
+        "獨自開發網站三年，客戶不到 5 人，失去動力後不斷轉向新專案"
+       ],
+       [
+        "1vp93l0:F2",
+        "共9款App上架，除一款外其餘皆已不再積極開發，合計零訂閱收入，作者坦承從不淘汰舊專案"
+       ]
+      ]
+     },
+     "lesson": "沒有用戶時想靠多開發產品來解決，是個會讓人忙碌但破產的陷阱"
+    },
+    {
+     "text": "三天內把能動的版本丟出去，之後靠回饋改",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": 30,
+      "mrr": 110
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式2",
+      "n": 11,
+      "up": 5,
+      "name": "MVP 用幾天到三週做出來就上線，之後靠回饋迭代",
+      "caution": "ATS 履歷優化工具作者提出相反經驗：快速發布並事後修正的策略對其無效，因為目標受眾需要從一開始就精緻且可靠的產品",
+      "cases": [
+       [
+        "1t5d028:C1",
+        "Actorle 3天做出的 Wordle 變體，4年後仍有約1萬DAU"
+       ],
+       [
+        "1w72lrt:C2",
+        "Yadaphone：兩天建置，發布後 2 分鐘內成交第一筆"
+       ]
+      ]
+     },
+     "lesson": "上線之後，你才會知道哪一段架構真的值得寫好"
+    },
+    {
+     "text": "砍掉一半功能，只留使用者真的會碰的那幾個",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 20,
+      "mrr": 90,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能——早期過度打磨進階功能而忽視了簡單易用性",
+      "cases": [
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費，8 個月 $2K MRR"
+       ],
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ]
+      ]
+     },
+     "lesson": "功能少不是妥協，是把維護成本花在有人用的地方"
+    }
+   ]
+  },
+  {
+   "id": "v-friends",
+   "phase": 1,
+   "title": "12 個朋友試用了 beta",
+   "scene": "10 個說「很好用」。2 個沒回。\n你覺得驗證完成了。",
+   "options": [
+    {
+     "text": "當作驗證通過，開始加功能",
+     "tier": "bad",
+     "d": {
+      "cash": -400
+     },
+     "ref": {
+      "ch": "需求／價值不足",
+      "pat": "模式9",
+      "n": 18,
+      "name": "把訪談、問卷、親友與 beta 的好話當成驗證",
+      "cases": [
+       [
+        "1skp96v:F1",
+        "每次都做訪談驗證、獲得正面反應，每次完成後都沒有付費客戶"
+       ],
+       [
+        "1s0cp3b:F1",
+        "依受訪者「願意付費」的說法建了兩個 MVP，合計收入為零"
+       ]
+      ]
+     },
+     "lesson": "「問卷和點讚無法預測真實購買行為」"
+    },
+    {
+     "text": "請他們幫忙轉發給更多人",
+     "tier": "bad",
+     "d": {
+      "cash": -80,
+      "users": 40,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式5",
+      "n": 109,
+      "name": "只靠在 Reddit／X／LinkedIn 等社群發文當作獲客",
+      "cases": [
+       [
+        "1srdgcv:F2",
+        "X 曝光 20 萬零銷售，freemium 轉換 <1%"
+       ],
+       [
+        "1s2994s:F1",
+        "Reddit 多次發文 1000+ 瀏覽但下載數為零"
+       ]
+      ]
+     },
+     "lesson": "朋友的轉發帶來的是朋友的朋友，不是買家"
+    },
+    {
+     "text": "把付款連結寄給那 10 個人",
+     "tier": "good",
+     "d": {
+      "cash": -40,
+      "users": 2,
+      "mrr": 60
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式6",
+      "n": 12,
+      "up": 0,
+      "name": "把「陌生人付錢」當成唯一算數的驗證訊號，親友捧場不算",
+      "caution": "Autenda 作者明確提醒「測試早期付費意願是有用的，但警告不要將低價位的少量付費視為對實際定價模式的驗證」",
+      "cases": [
+       [
+        "1uzw46v:C1",
+        "Rendrio：陌生人選最慢選項看完後付 $9，作者視為比朋友讚更有意義的驗證"
+       ],
+       [
+        "1r6666m:C1",
+        "shippipe.app：MVP 完成前就有 3 位付費用戶，作者強調陌生人付費比朋友讚美重要"
+       ]
+      ]
+     },
+     "lesson": "一筆陌生人的付款，比十句「很好用」有訊號"
+    },
+    {
+     "text": "去找 20 個完全不認識你的人重測一次",
+     "tier": "good",
+     "d": {
+      "cash": -160,
+      "users": 12,
+      "mrr": 120
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式7",
+      "n": 8,
+      "up": 3,
+      "name": "冷外聯（冷 DM／冷 Email／LinkedIn）鎖定已知有需求或在用競品的人",
+      "caution": "GentleInvoice 作者持續接觸潛在客戶、安排通話，收入仍停滯在 $250 MRR 好幾個月",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 B2B SaaS：逐一致電 200+ 企業找出未使用方案者，4 年後以 600 萬美元出售"
+       ],
+       [
+        "1j0w1ys:C1",
+        "未命名 B2B（律師/公證人）：寄實體包裹開發信，90 天內鎖定 50 萬瑞郎合約"
+       ]
+      ]
+     },
+     "lesson": "認識你的人在評價你，不是在評價產品"
+    }
+   ]
+  },
+  {
+   "id": "v-ai-speed",
+   "phase": 1,
+   "title": "這是你這個月的第三個產品",
+   "scene": "前兩個加起來 0 個付費用戶。\n但這個真的做得很快，一個週末就完成了。",
+   "tracks": [
+    "ai",
+    "b2c"
+   ],
+   "options": [
+    {
+     "text": "做第四個，總有一個會中",
+     "tier": "bad",
+     "d": {
+      "cash": -300,
+      "fixed": 120
+     },
+     "ref": {
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式1",
+      "n": 28,
+      "name": "用 AI／vibe coding 很快做完，上線後沒有人來",
+      "cases": [
+       [
+        "1vr33qv:F1",
+        "Claude Max、7–8 個月、每週 70–80 小時做完所有功能，零付費客戶後關閉"
+       ],
+       [
+        "1rrlhlr:F1",
+        "9 個月 vibe coding 4 個產品，總收入 0 美元，訂閱費持續扣款"
+       ]
+      ]
+     },
+     "lesson": "「AI 讓建置更快，但無法讓判斷力更快」"
+    },
+    {
+     "text": "寫一篇「我如何用 AI 一週做三個產品」",
+     "tier": "bad",
+     "d": {
+      "cash": -60,
+      "users": 70,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式5",
+      "n": 109,
+      "name": "只靠在 Reddit／X／LinkedIn 等社群發文當作獲客",
+      "cases": [
+       [
+        "1srdgcv:F2",
+        "X 曝光 20 萬零銷售，freemium 轉換 <1%"
+       ],
+       [
+        "1s2994s:F1",
+        "Reddit 多次發文 1000+ 瀏覽但下載數為零"
+       ]
+      ]
+     },
+     "lesson": "看你怎麼做的人，跟會付錢的人不是同一群"
+    },
+    {
+     "text": "停手。在第一個產品拿到 5 個付費用戶之前不開新的",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 5,
+      "mrr": 130
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式1",
+      "n": 28,
+      "name": "用 AI／vibe coding 很快做完，上線後沒有人來",
+      "cases": [
+       [
+        "1slo494:F1",
+        "用 4 個 AI agent 一天內建置並終止 9 個產品，事前沒有任何判斷標準"
+       ],
+       [
+        "1spk7no:F1",
+        "以 Claude 一個下午一個地上線 12 個產品，30 天僅 17 美元，11 個被擱置"
+       ]
+      ]
+     },
+     "lesson": "「在至少 5 個付費用戶願意向朋友推薦單一產品之前，不再推出新產品」"
+    },
+    {
+     "text": "把三個產品的用戶全部手工訪問一輪",
+     "tier": "good",
+     "d": {
+      "cash": -140,
+      "users": 4,
+      "mrr": 100
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式8",
+      "n": 8,
+      "up": 3,
+      "name": "先用人工、不可規模化的方式服務最初幾位客戶，之後才自動化",
+      "caution": "這是早期少量客戶時才可行的做法，規模擴大後仍堅持高接觸服務會拖慢成長速度",
+      "cases": [
+       [
+        "1md4hd3:C3",
+        "未命名 SaaS：先在自家企業內部測試、第一年僅靠熟人拿 5 位客戶，後達 ARR $1M"
+       ],
+       [
+        "1jv1ph6:C1",
+        "Superwrapper：獲得足夠用戶後才安排訪談，一個月內轉為獲利"
+       ]
+      ]
+     },
+     "lesson": "建置變便宜之後，稀缺的是判斷力"
+    }
+   ]
+  },
+  {
+   "id": "a-silence",
+   "phase": 2,
+   "title": "上線第 14 天",
+   "scene": "總註冊 3 人。其中 2 個是你自己開的測試帳號。",
+   "options": [
+    {
+     "text": "再等等，SEO 需要時間",
+     "tier": "bad",
+     "d": {
+      "cash": -200
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式10",
+      "n": 65,
+      "name": "SEO／部落格／內容行銷沒有帶來流量，或太慢",
+      "cases": [
+       [
+        "1tbsq3p:F3",
+        "48 天發 43 個工具網站，僅 5 個被索引，零付費客戶"
+       ],
+       [
+        "1txc96x:F1",
+        "Google 未索引，3 月整個月僅 2 次點擊"
+       ]
+      ]
+     },
+     "lesson": "「分發比開發難十倍」"
+    },
+    {
+     "text": "買 $800 廣告，先把人衝進來",
+     "tier": "bad",
+     "d": {
+      "cash": -800,
+      "users": 140,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式6",
+      "n": 100,
+      "name": "付費廣告花了錢，註冊或付費極少",
+      "cases": [
+       [
+        "1towpxq:F1",
+        "花 $1,078 廣告獲 226 註冊，零付費轉換"
+       ],
+       [
+        "1s84rgr:F1",
+        "44 萬曝光僅 14 註冊、1 付費客戶，自述免費方案吸引到錯誤受眾"
+       ]
+      ]
+     },
+     "lesson": "花錢投廣告前應先改善轉換與 onboarding，否則廣告費是浪費"
+    },
+    {
+     "text": "每天到目標社群留 20 則有幫助的留言，不貼連結",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 55,
+      "mrr": 220
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式1",
+      "n": 14,
+      "up": 3,
+      "name": "在目標用戶聚集的小型社群，先留下有幫助的公開評論，再私訊（不貼連結、不推銷）",
+      "caution": "效果高度依賴選對 subreddit——選錯地方，同樣的評論量可以是 0 轉換",
+      "cases": [
+       [
+        "1rywwfg:C1",
+        "LeadVerse.ai：每天回覆約 20 則貼文的有幫助評論、私訊不推銷，達 profitability，90 位付費客戶"
+       ],
+       [
+        "1to662l:C5",
+        "6 個月只用 DM 提供價值不推銷"
+       ]
+      ]
+     },
+     "lesson": "先給價值再私訊，不貼連結、不推銷"
+    },
+    {
+     "text": "承認你不會賣，開始每天固定排行銷時間",
+     "tier": "ok",
+     "d": {
+      "cash": -50,
+      "users": 20,
+      "mrr": 60
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "獲客失敗",
+      "pat": "模式1",
+      "n": 160,
+      "name": "技術型創辦人自述「會做不會賣」，不知道怎麼拿到第一批用戶",
+      "cases": [
+       [
+        "1qecyqx:F1",
+        "solo 創辦人擅長編碼不擅長銷售，不知如何獲得前十個用戶，像在自言自語"
+       ],
+       [
+        "1jaffjf:F1",
+        "上線一週 20 名用戶中 19 名為朋友，自述行銷是最困難的環節"
+       ]
+      ]
+     },
+     "lesson": "這是資料中最大的單一模式：160 人講同一件事"
+    }
+   ]
+  },
+  {
+   "id": "a-cold-email",
+   "phase": 2,
+   "title": "1,700 封冷郵件",
+   "scene": "5 個人點開。0 個註冊。\n你的模板寫得很漂亮。",
+   "tracks": [
+    "b2b",
+    "agency"
+   ],
+   "options": [
+    {
+     "text": "再寄 5,000 封，這是數字遊戲",
+     "tier": "bad",
+     "d": {
+      "cash": -400,
+      "fixed": 120
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式4",
+      "n": 112,
+      "name": "冷外聯（冷郵件／LinkedIn DM／冷電話）回覆率接近零",
+      "cases": [
+       [
+        "1ry5nrp:F1",
+        "1,700 封冷郵件僅 5 人點擊、0 人註冊"
+       ],
+       [
+        "1pd0tle:F1",
+        "500 封冷開發信約 3% 回覆率、零轉換"
+       ]
+      ]
+     },
+     "lesson": "廣撒通用模板郵件行不通，應加入真實對話"
+    },
+    {
+     "text": "用 AI 幫每封信生成個人化開頭",
+     "tier": "bad",
+     "d": {
+      "cash": -250,
+      "fixed": 90
+     },
+     "ref": {
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式9",
+      "n": 6,
+      "name": "用 AI 量產外展或內容，得到沉默、封鎖或去索引",
+      "cases": [
+       [
+        "1vpfj8i:F3",
+        "自動化發佈的 6 個網站約 80 萬頁被 Google 去索引，月收入 1,300→300 美元"
+       ],
+       [
+        "1vd14yx:F1",
+        "10 個 TikTok 帳號發 AI 幻燈片，瀏覽卡在 300–2k，約 2,000 瀏覽換 1 安裝"
+       ]
+      ]
+     },
+     "lesson": "量產的個人化，收件人一眼就看得出來"
+    },
+    {
+     "text": "挑 30 個正在用競品且公開抱怨過的人，逐一打電話",
+     "tier": "good",
+     "d": {
+      "cash": -200,
+      "users": 9,
+      "mrr": 480
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式7",
+      "n": 8,
+      "up": 3,
+      "name": "冷外聯（冷 DM／冷 Email／LinkedIn）鎖定已知有需求或在用競品的人",
+      "caution": "GentleInvoice 作者持續接觸潛在客戶、安排通話，收入仍停滯在 $250 MRR 好幾個月",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 B2B SaaS：逐一致電 200+ 企業找出未使用方案者，4 年後以 600 萬美元出售"
+       ],
+       [
+        "1j0w1ys:C1",
+        "未命名 B2B（律師／公證人）：寄實體包裹開發信，90 天內鎖定 50 萬瑞郎合約"
+       ]
+      ]
+     },
+     "lesson": "名單品質決定回覆率，文案只決定邊際"
+    },
+    {
+     "text": "改從認識的人與舊客戶開始要引薦",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 6,
+      "mrr": 520
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式7",
+      "n": 12,
+      "up": 5,
+      "name": "靠既有人脈、產業關係或口碑推薦拿到最初（甚至全部）B2B 客戶",
+      "caution": "作者明確承認前 5–10 位客戶雖然來自認識的人，但這種方式「無法規模化，並非增長策略」",
+      "cases": [
+       [
+        "1t2f4qc:C1",
+        "B2B SaaS marketplace plugin（oalbrecht）：幾乎不做行銷，客戶全靠應用市場自然"
+       ],
+       [
+        "1w4hp89:C1",
+        "南非 SaaS 新創：靠有銷售背景的共同創辦人＋產業內部關係拿到經銷合約，4 年後以 $600 萬出售，屬 ex"
+       ]
+      ]
+     },
+     "lesson": "引薦不能規模化，但它能讓你活到能規模化那天"
+    }
+   ]
+  },
+  {
+   "id": "a-single-channel",
+   "phase": 2,
+   "title": "你的獲客策略是「每週發三篇 Reddit」",
+   "scene": "第五週開始，貼文上線 10 分鐘就被自動移除。\n你沒有 email 名單，沒有第二個渠道。",
+   "options": [
+    {
+     "text": "開小號繼續發，這是唯一有效的渠道",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 60,
+      "churn": 5
+     },
+     "flag": "onechannel",
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式5",
+      "n": 109,
+      "name": "只靠在 Reddit／X／LinkedIn 等社群發文當作獲客",
+      "cases": [
+       [
+        "1srdgcv:F2",
+        "X 曝光 20 萬零銷售，freemium 轉換 <1%"
+       ],
+       [
+        "1s2994s:F1",
+        "Reddit 多次發文 1000+ 瀏覽但下載數為零"
+       ]
+      ]
+     },
+     "lesson": "把全部流量押在一個你不擁有的帳號上"
+    },
+    {
+     "text": "加大發文頻率，用量換曝光",
+     "tier": "bad",
+     "d": {
+      "cash": -100,
+      "users": 90,
+      "churn": 6
+     },
+     "flag": "onechannel",
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式8",
+      "n": 80,
+      "name": "初期一波之後成長停滯，或獲客全靠單一來源",
+      "cases": [
+       [
+        "1qy553c:F6",
+        "$7k MRR 時依賴手動在 subreddit 發文，停發即停滯"
+       ],
+       [
+        "1uxzooc:F1",
+        "單靠 Reddit 發文獲客，發文疲勞後渠道枯竭"
+       ]
+      ]
+     },
+     "lesson": "手動的渠道，停手就停成長"
+    },
+    {
+     "text": "改成真誠回答自己擅長的問題，順便開始養 email 名單",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": 45,
+      "mrr": 260,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式1",
+      "n": 14,
+      "up": 3,
+      "name": "在目標用戶聚集的小型社群，先留下有幫助的公開評論，再私訊（不貼連結、不推銷）",
+      "caution": "效果高度依賴選對 subreddit——選錯地方，同樣的評論量可以是 0 轉換",
+      "cases": [
+       [
+        "1rywwfg:C1",
+        "LeadVerse.ai：每天回覆約 20 則有幫助的評論、私訊不推銷，達 profitability"
+       ],
+       [
+        "1to662l:C5",
+        "6 個月只用 DM 提供價值不推銷，追蹤不同 subreddit 的轉換差異"
+       ]
+      ]
+     },
+     "lesson": "停止以轉換為目的發文，改成真誠回答自己擅長的問題"
+    },
+    {
+     "text": "開第二條腿：做比較頁與免費工具，接受三個月才見效",
+     "tier": "good",
+     "d": {
+      "cash": -250,
+      "users": 30,
+      "mrr": 210
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式3",
+      "n": 17,
+      "up": 6,
+      "name": "從第一天就投入 SEO／內容行銷（部落格、比較頁、免費工具），接受 2–6 個月才見效",
+      "caution": "2024 年 12 月 Google 演算法更新直接打掉某 ATS 工具的流量與收入；多人強調 SEO 起效慢，常需 3 個月以上",
+      "cases": [
+       [
+        "1s2tmrg:C1",
+        "Conductor：100% 客戶來自 SEO／GitHub 自然流量，收到 $100 萬收購意向書"
+       ],
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：4 個免費情緒儀表板做 SEO 引流，已達 profitability"
+       ]
+      ]
+     },
+     "lesson": "兩個渠道不是兩倍工作，是一個備援"
+    }
+   ]
+  },
+  {
+   "id": "a-paid-ads",
+   "phase": 2,
+   "title": "$1,078",
+   "scene": "226 個註冊。0 個付費。\n廣告後台顯示一切正常：點擊率不錯，成本也在預算內。",
+   "options": [
+    {
+     "text": "加預算，樣本數不夠",
+     "tier": "bad",
+     "d": {
+      "cash": -1200,
+      "users": 200,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式2",
+      "n": 11,
+      "name": "付費廣告的 CAC／CPA 超過客單價或 LTV，廣告數學不成立",
+      "cases": [
+       [
+        "1ll8wjw:F1",
+        "目標受眾精準、用戶真實，但 LTV 仍遠低於每安裝 $2–12 的獲客成本"
+       ],
+       [
+        "1v55qt5:F5",
+        "付費廣告的 CAC 達首年收入的多倍，單位經濟模型未跑通"
+       ]
+      ]
+     },
+     "lesson": "廣告數學不成立的時候，加預算只是加快燒錢"
+    },
+    {
+     "text": "換一個平台試試",
+     "tier": "bad",
+     "d": {
+      "cash": -700,
+      "users": 80,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式9",
+      "n": 70,
+      "name": "渠道到處亂試，每個都淺嘗即止",
+      "cases": [
+       [
+        "1p30zvq:F1",
+        "同時嘗試多渠道行銷，未掌握任一渠道，95% 用戶未回訪、僅 1 人付費 $9.99"
+       ],
+       [
+        "1riyy2c:F4",
+        "每兩週因論壇言論更換一次成長策略"
+       ]
+      ]
+     },
+     "lesson": "「同時嘗試所有渠道不等於進展」"
+    },
+    {
+     "text": "停掉廣告，把那 226 個人為什麼不付錢先搞清楚",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": -20,
+      "mrr": 240,
+      "churn": -3
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能",
+      "cases": [
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ],
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費"
+       ]
+      ]
+     },
+     "lesson": "漏的桶子裡，倒更多水只是倒更多水"
+    },
+    {
+     "text": "把廣告預算改成做一個免費小工具當漏斗頂端",
+     "tier": "good",
+     "d": {
+      "cash": -300,
+      "users": 70,
+      "mrr": 280
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式10",
+      "n": 6,
+      "up": 4,
+      "name": "先做免費小工具/免費儀表板當作漏斗頂端，再導向付費功能",
+      "caution": "反例是「拿掉免費方案反而讓收入提升」——VideoYards 與 GhostBill 系列都提到移除免費層級後才出現第一位付費客戶",
+      "cases": [
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：4 個免費情緒分析儀表板做引流，35% 付費用戶先用過免費工具"
+       ],
+       [
+        "1p2x3gf:C1",
+        "Postiz：自建多個免費 SEO 工具，每月 1.68 萬次瀏覽，做到 $20k MRR"
+       ]
+      ]
+     },
+     "lesson": "免費工具會留下連結，廣告停了什麼都不留"
+    }
+   ]
+  },
+  {
+   "id": "a-traffic-no-pay",
+   "phase": 2,
+   "title": "漏斗數字",
+   "scene": "17.5% 的人點了 CTA。\n8.5% 留了 email。\n0.25% 付錢。",
+   "options": [
+    {
+     "text": "再衝流量，把這些百分比乘上去就好",
+     "tier": "bad",
+     "d": {
+      "cash": -900,
+      "users": 180,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式7",
+      "n": 86,
+      "name": "有流量、註冊或口頭興趣，但不轉成付費",
+      "cases": [
+       [
+        "1s5kq5a:F1",
+        "17.5% 點擊 CTA、8.5% 留 email、僅 0.25% 付費，流量需求遠超預期"
+       ],
+       [
+        "1t6eo5p:F1",
+        "上市貼文 84 則留言、零銷售，外聯頻道已讀不回"
+       ]
+      ]
+     },
+     "lesson": "當事人推算：要每月 4 萬訪客才能撐到 100 個付費用戶"
+    },
+    {
+     "text": "降價一半，降低門檻",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 90,
+      "mrr": 40,
+      "churn": 5
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ],
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶，LTV:CAC 僅 1.4"
+       ]
+      ]
+     },
+     "lesson": "價格不是轉換率的瓶頸時，降價只換到更差的客戶"
+    },
+    {
+     "text": "先算清楚：這個客單價要多少訪客才撐得起生活費",
+     "tier": "ok",
+     "d": {
+      "cash": -40,
+      "users": 10,
+      "mrr": 50
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "獲客失敗",
+      "pat": "模式7",
+      "n": 86,
+      "name": "有流量、註冊或口頭興趣，但不轉成付費",
+      "cases": [
+       [
+        "1s5kq5a:F1",
+        "17.5% 點擊 CTA、8.5% 留 email、僅 0.25% 付費，流量需求遠超預期"
+       ],
+       [
+        "1t6eo5p:F1",
+        "上市貼文 84 則留言、零銷售"
+       ]
+      ]
+     },
+     "lesson": "「應在開始前設定符合實際數學的預期」"
+    },
+    {
+     "text": "拿掉免費方案，試用改成要綁卡",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": -60,
+      "mrr": 340,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式2",
+      "n": 9,
+      "up": 4,
+      "name": "拿掉免費方案、收緊免費層級，或試用要求先綁信用卡",
+      "caution": "FeedbackQueue 作者明確表示實施硬性付費牆會扼殺平台的成長，因此選擇保留免費層級",
+      "cases": [
+       [
+        "1qlglwd:C1",
+        "Videoyards 拿掉免費方案才有第一位付費客戶（exit）"
+       ],
+       [
+        "1mb5blw:C1",
+        "Tydal 用須綁卡的 3 天試用驅動轉換（sustained_revenue）"
+       ]
+      ]
+     },
+     "lesson": "註冊數會掉九成，付費數從 0 變成不是 0"
+    }
+   ]
+  },
+  {
+   "id": "a-channel-hop",
+   "phase": 2,
+   "title": "這三個月你試過六個渠道",
+   "scene": "TikTok、Reddit、冷郵件、Product Hunt、SEO、IG。\n每個做兩週，每個都「感覺沒什麼效果」。",
+   "options": [
+    {
+     "text": "再試 LinkedIn，這個應該比較適合",
+     "tier": "bad",
+     "d": {
+      "cash": -400,
+      "users": 50,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式9",
+      "n": 70,
+      "name": "渠道到處亂試，每個都淺嘗即止",
+      "cases": [
+       [
+        "1p30zvq:F1",
+        "同時嘗試多渠道行銷，未掌握任一渠道，95% 用戶未回訪、僅 1 人付費 $9.99"
+       ],
+       [
+        "1riyy2c:F4",
+        "每兩週因論壇言論更換一次成長策略"
+       ]
+      ]
+     },
+     "lesson": "「應深耕單一社群，而不是分散於十個渠道」"
+    },
+    {
+     "text": "六個一起做，寫個排程自動發",
+     "tier": "bad",
+     "d": {
+      "cash": -500,
+      "fixed": 150,
+      "users": 70,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式6",
+      "n": 12,
+      "name": "同時經營多個專案、不斷追逐新點子，樣樣做不好",
+      "cases": [
+       [
+        "1vp93l0:F2",
+        "共 9 款 App 上架，除一款外其餘皆已不再積極開發，合計零訂閱收入"
+       ],
+       [
+        "1i0d34r:F1",
+        "獨自開發網站三年，客戶不到 5 人，不斷轉向新專案"
+       ]
+      ]
+     },
+     "lesson": "自動化一件沒效的事，只會更有效率地沒效"
+    },
+    {
+     "text": "挑數字最好的那一個，只做它，做六個月",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "users": 60,
+      "mrr": 300
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式3",
+      "n": 17,
+      "up": 6,
+      "name": "從第一天就投入 SEO／內容行銷（部落格、比較頁、免費工具），接受 2–6 個月才見效",
+      "caution": "2024 年 12 月 Google 演算法更新直接打掉某 ATS 工具的流量與收入；多人強調 SEO 起效慢，常需 3 個月以上",
+      "cases": [
+       [
+        "1s2tmrg:C1",
+        "Conductor：100% 客戶來自 SEO／GitHub 自然流量，收到 $100 萬收購意向書"
+       ],
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：4 個免費情緒儀表板做 SEO 引流，已達 profitability，流失率因提"
+       ]
+      ]
+     },
+     "lesson": "兩週看不出渠道有沒有效，只看得出你有沒有耐心"
+    },
+    {
+     "text": "找幾個小型社群管理員或利基網站談導流合作",
+     "tier": "ok",
+     "d": {
+      "cash": -180,
+      "users": 40,
+      "mrr": 120
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式8",
+      "n": 9,
+      "up": 3,
+      "name": "與小型社群管理員、微型網紅或利基網站建立聯盟/導流合作",
+      "caution": "GojiBerry AI 作者付費 $1,250 請 5 位 LinkedIn 網紅推廣兩週，其中兩位完全沒帶來任何流量或轉換，",
+      "cases": [
+       [
+        "1jq97h6:C1",
+        "Picyard：聯繫 Facebook 社團管理員談聯盟行銷，約 80% 收入來自這些社團貼文，最終被收購，屬 "
+       ],
+       [
+        "1p2x3gf:C1",
+        "Postiz：對 Skool 社群冷外聯＋啟動聯盟計畫，做到 $20k MRR，屬 sustained_reve"
+       ]
+      ]
+     },
+     "lesson": "別人的受眾比你的廣告便宜，但也比較難控制"
+    }
+   ]
+  },
+  {
+   "id": "a-seo-slow",
+   "phase": 2,
+   "title": "43 篇文章，5 篇被索引",
+   "scene": "三月整個月：2 次點擊。\n你用 AI 一天可以生 10 篇。",
+   "options": [
+    {
+     "text": "一天發 10 篇，量大就會中",
+     "tier": "bad",
+     "d": {
+      "cash": -350,
+      "fixed": 100
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式10",
+      "n": 65,
+      "name": "SEO／部落格／內容行銷沒有帶來流量，或太慢",
+      "cases": [
+       [
+        "1tbsq3p:F3",
+        "48 天發 43 個工具網站，僅 5 個被索引，零付費客戶"
+       ],
+       [
+        "1txc96x:F1",
+        "Google 未索引，3 月整個月僅 2 次點擊"
+       ]
+      ]
+     },
+     "lesson": "程式化 SEO 被形容為經典的獨立開發者錯誤，AI Overviews 會直接吞掉這類頁面的流量"
+    },
+    {
+     "text": "買外鏈把權重衝上去",
+     "tier": "bad",
+     "d": {
+      "cash": -600,
+      "users": 30
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式2",
+      "n": 10,
+      "name": "Google 搜尋演算法或政策一次調整，SEO 流量與收入斷崖式下滑",
+      "cases": [
+       [
+        "1vpfj8i:F3",
+        "一次不可逆的 taxonomy 變更後，Google 將約 80 萬個頁面去索引，6 個自動化網站的月收入從 1"
+       ],
+       [
+        "1ig9cjl:F2",
+        "Google 將自然觸及砍 90%，因從未投廣告而流量與銷售雙雙蒸發"
+       ]
+      ]
+     },
+     "lesson": "押在別人演算法上的流量，別人隨時可以收回"
+    },
+    {
+     "text": "停掉文章，改做兩個免費小工具",
+     "tier": "good",
+     "d": {
+      "cash": -280,
+      "users": 75,
+      "mrr": 290
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式10",
+      "n": 6,
+      "up": 4,
+      "name": "先做免費小工具/免費儀表板當作漏斗頂端，再導向付費功能",
+      "caution": "反例是「拿掉免費方案反而讓收入提升」——VideoYards 與 GhostBill 系列都提到移除免費層級後才出現第一位付費客戶",
+      "cases": [
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：4 個免費情緒分析儀表板做引流，35% 付費用戶先用過免費工具"
+       ],
+       [
+        "1p2x3gf:C1",
+        "Postiz：自建多個免費 SEO 工具，每月 1.68 萬次瀏覽，做到 $20k MRR"
+       ]
+      ]
+     },
+     "lesson": "工具會被連結，文章只會被滑過去"
+    },
+    {
+     "text": "接受它就是慢，同時開一條見效快的渠道",
+     "tier": "ok",
+     "d": {
+      "cash": -120,
+      "users": 35,
+      "mrr": 110
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式3",
+      "n": 17,
+      "up": 6,
+      "name": "從第一天就投入 SEO／內容行銷（部落格、比較頁、免費工具），接受 2–6 個月才見效",
+      "caution": "2024 年 12 月 Google 演算法更新直接打掉某 ATS 工具的流量與收入；多人強調 SEO 起效慢，常需 3 個月以上",
+      "cases": [
+       [
+        "1s2tmrg:C1",
+        "Conductor：100% 客戶來自 SEO／GitHub 自然流量"
+       ],
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：免費儀表板做 SEO 引流，已達 profitability"
+       ]
+      ]
+     },
+     "lesson": "SEO 的問題不是沒效，是它不能當你唯一的計畫"
+    }
+   ]
+  },
+  {
+   "id": "a-landing",
+   "phase": 2,
+   "title": "平均停留 8 秒",
+   "scene": "200 個訪客。你朋友看完首頁問你：「所以這個到底是幹嘛的？」",
+   "options": [
+    {
+     "text": "加一段更詳細的說明",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 15
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式3",
+      "n": 24,
+      "name": "落地頁／首頁訊息不清，訪客看不懂產品在做什麼就跳出",
+      "cases": [
+       [
+        "1trk894:F1",
+        "SCORIXA：行銷過度聚焦「看到你的損失數字」而未呈現後續解方，作者稱之為自己的訊息傳達失誤"
+       ],
+       [
+        "1qi4v0z:F1",
+        "AiAssist.net：即使月費僅 $4.99，社群推廣後仍無任何轉換"
+       ]
+      ]
+     },
+     "lesson": "「花太多時間解釋產品做什麼，卻沒解釋為什麼有人需要它」"
+    },
+    {
+     "text": "重做設計，換個更潮的字體跟動畫",
+     "tier": "bad",
+     "d": {
+      "cash": -500,
+      "users": 20
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式3",
+      "n": 24,
+      "name": "落地頁／首頁訊息不清，訪客看不懂產品在做什麼就跳出",
+      "cases": [
+       [
+        "1qi4v0z:F1",
+        "AiAssist.net：即使月費僅 $4.99，社群推廣後仍無任何轉換"
+       ],
+       [
+        "1trk894:F1",
+        "SCORIXA：作者自承是自己的訊息傳達失誤，而非產品問題"
+       ]
+      ]
+     },
+     "lesson": "「問題不是定價而是清晰度與信任」"
+    },
+    {
+     "text": "首頁只回答三件事：給誰、拿到什麼結果、為什麼敢試",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 40,
+      "mrr": 260,
+      "churn": -2
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "啟用／轉換",
+      "pat": "模式3",
+      "n": 24,
+      "name": "落地頁／首頁訊息不清，訪客看不懂產品在做什麼就跳出",
+      "cases": [
+       [
+        "1trk894:F1",
+        "SCORIXA：只講損失數字沒講解方，作者自承是訊息傳達失誤"
+       ],
+       [
+        "1qi4v0z:F1",
+        "AiAssist.net：月費僅 $4.99 仍無任何轉換"
+       ]
+      ]
+     },
+     "lesson": "落地頁需要立刻回答：這是給誰用的、能得到什麼結果、為什麼可以放心嘗試"
+    },
+    {
+     "text": "砍掉首頁上一半的功能介紹",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": 30,
+      "mrr": 190,
+      "churn": -1
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能",
+      "cases": [
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費"
+       ],
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ]
+      ]
+     },
+     "lesson": "講十件事等於沒講"
+    }
+   ]
+  },
+  {
+   "id": "a-no-dist",
+   "phase": 2,
+   "title": "九個月，零行銷",
+   "scene": "你一次分發都沒做過。\n你跟自己說：「產品還沒準備好。」",
+   "options": [
+    {
+     "text": "再做兩個月，這次一定準備好",
+     "tier": "bad",
+     "d": {
+      "cash": -800
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式3",
+      "n": 112,
+      "name": "先把產品做完，上線後才開始想分發",
+      "cases": [
+       [
+        "1scak5b:F1",
+        "上線前無受眾、無分發策略，前兩週 0 名用戶"
+       ],
+       [
+        "1rg24rr:F2",
+        "建了 9 個月從未行銷，自述沉迷工程逃避行銷"
+       ]
+      ]
+     },
+     "lesson": "不該假設做好產品就有人來；應從第一天就開始行銷，不要沉迷工程來逃避"
+    },
+    {
+     "text": "找一個行銷共同創辦人，分 50% 股權",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 40
+     },
+     "ref": {
+      "ch": "團隊衝突",
+      "pat": "模式1",
+      "n": 10,
+      "name": "共同創辦人持股卻不投入，主力創辦人被迫獨自扛下全部執行",
+      "cases": [
+       [
+        "1ksfkz4:F3",
+        "技術方無償投入約 2,000 小時於對方的點子，夥伴隱瞞並將精力轉投另一個點子"
+       ],
+       [
+        "1klopqw:F3",
+        "共同創辦人完全不投入工作，留言者獨自營運三年"
+       ]
+      ]
+     },
+     "lesson": "以為『他們很優秀就會努力工作』，事後認為是錯判"
+    },
+    {
+     "text": "今天就上線，明天開始每天固定做分發",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 50,
+      "mrr": 240
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式2",
+      "n": 11,
+      "up": 5,
+      "name": "MVP 用幾天到三週做出來就上線，之後靠回饋迭代",
+      "caution": "ATS 履歷優化工具作者提出相反經驗：快速發布並事後修正的策略對其無效，因為目標受眾需要從一開始就精緻且可靠的產品",
+      "cases": [
+       [
+        "1t5d028:C1",
+        "Actorle 3天做出的 Wordle 變體，4年後仍有約1萬DAU"
+       ],
+       [
+        "1w72lrt:C2",
+        "Yadaphone：兩天建置，發布後 2 分鐘內成交第一筆"
+       ]
+      ]
+     },
+     "lesson": "產品還沒準備好通常是我還沒準備好被拒絕"
+    },
+    {
+     "text": "用自己的產品去做自己的行銷",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": 45,
+      "mrr": 300
+     },
+     "tracks": [
+      "ai",
+      "b2b",
+      "b2c"
+     ],
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式4",
+      "n": 6,
+      "up": 3,
+      "name": "用自己開發的產品／工具反過來行銷自己（dogfooding）",
+      "caution": "來源未提供——本批資料中沒有找到「用自己工具行銷自己」明確失敗的案例，但多位作者也承認這套做法只適用於行銷／增長類工具本身，其他",
+      "cases": [
+       [
+        "1mb5blw:C1",
+        "Tydal：用自己的 Reddit 行銷工具推廣自己，7 個月做到 $2,400+ MRR"
+       ],
+       [
+        "1olrxlb:C1",
+        "Rybbit：開源自架，Product Hunt 兩次登頂，5 個月做到 $1,900 MRR"
+       ]
+      ]
+     },
+     "lesson": "你自己不用的產品，很難說服別人用"
+    }
+   ]
+  },
+  {
+   "id": "a-unreachable",
+   "phase": 2,
+   "title": "你找不到他們",
+   "scene": "你的客戶是中小型律所的決策者。\n80 通電話，4 次真的跟決策者講到話。Reddit 廣告沒有效，X 上沒有這群人。",
+   "tracks": [
+    "b2b",
+    "agency"
+   ],
+   "options": [
+    {
+     "text": "繼續打，總會打到",
+     "tier": "bad",
+     "d": {
+      "cash": -500,
+      "users": 3
+     },
+     "ref": {
+      "ch": "獲客失敗",
+      "pat": "模式2",
+      "n": 114,
+      "name": "目標客群難以觸及，找不到他們聚集的渠道",
+      "cases": [
+       [
+        "1smcgjg:F1",
+        "B2B 冷 call 律所決策者，80 通電話僅 4 次高管對話，Reddit 廣告與 X 皆無效"
+       ],
+       [
+        "1qq9cdb:F3",
+        "醫療銷售週期 3-6 個月、房仲難觸達、無預算做分發"
+       ]
+      ]
+     },
+     "lesson": "應在開發前先驗證：能否免費觸達 5000+ 目標客戶"
+    },
+    {
+     "text": "加大廣告預算硬買他們的注意力",
+     "tier": "bad",
+     "d": {
+      "cash": -1100,
+      "users": 25,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式2",
+      "n": 11,
+      "name": "付費廣告的 CAC／CPA 超過客單價或 LTV，廣告數學不成立",
+      "cases": [
+       [
+        "1ll8wjw:F1",
+        "目標受眾精準、用戶真實，但 LTV 仍遠低於每安裝 $2–12 的獲客成本"
+       ],
+       [
+        "1v55qt5:F5",
+        "付費廣告的 CAC 達首年收入的多倍"
+       ]
+      ]
+     },
+     "lesson": "難觸達的客群，付費廣告通常更貴不是更便宜"
+    },
+    {
+     "text": "換成一群你能免費觸達到 5,000 人的客群",
+     "tier": "good",
+     "d": {
+      "cash": -250,
+      "users": 25,
+      "mrr": 560,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群從建築 PM 換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ],
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師（流失率 2.1% vs 健身教練 8.3%）"
+       ]
+      ]
+     },
+     "lesson": "觸達不到的客群，產品再好也賣不出去"
+    },
+    {
+     "text": "透過產業公會、同業社群跟既有人脈引薦進去",
+     "tier": "good",
+     "d": {
+      "cash": -160,
+      "users": 8,
+      "mrr": 620
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式7",
+      "n": 12,
+      "up": 5,
+      "name": "靠既有人脈、產業關係或口碑推薦拿到最初（甚至全部）B2B 客戶",
+      "caution": "作者明確承認前 5–10 位客戶雖然來自認識的人，但這種方式「無法規模化，並非增長策略」",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 SaaS 新創：靠產業內部關係拿到經銷合約，4 年後以 $600 萬出售"
+       ],
+       [
+        "1t2f4qc:C1",
+        "B2B SaaS marketplace plugin（oalbrecht）：幾乎不做行銷，客戶全靠應用市場自然"
+       ]
+      ]
+     },
+     "lesson": "難觸達的客群，通常只剩一條路：有人幫你開門"
+    }
+   ]
+  },
+  {
+   "id": "a-ai-same",
+   "phase": 2,
+   "title": "你的首頁跟另外 39 個一模一樣",
+   "scene": "「AI 驅動的 ⋯⋯ 幫你自動化 ⋯⋯ 節省數小時」\n你自己讀完都分不出來哪個是你的。",
+   "tracks": [
+    "ai"
+   ],
+   "options": [
+    {
+     "text": "把「AI-powered」加大加粗",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 40,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式4",
+      "n": 21,
+      "name": "同質 AI 工具氾濫，無法讓人相信「我不一樣」",
+      "cases": [
+       [
+        "1tk50gs:F1",
+        "AI 面試 B2B SaaS，因市場上已有大量同類軟體而停止開發"
+       ],
+       [
+        "1s5qk7k:F1",
+        "白牌 AI 聊天機器人 12 個月、200 註冊、0 美元收入"
+       ]
+      ]
+     },
+     "lesson": "只靠『AI-powered』標籤就想爆紅是錯的"
+    },
+    {
+     "text": "做得比 ChatGPT 更全面",
+     "tier": "bad",
+     "d": {
+      "cash": -800,
+      "fixed": 150
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式3",
+      "n": 10,
+      "name": "ChatGPT／Claude／Cursor 等通用 AI 工具免費追上功能，專用付費工具一夜過時",
+      "cases": [
+       [
+        "1ritlj2:F1",
+        "VarNamer：Electron 桌面 App 投入 Apple 開發者憑證費、上線獲得不錯回饋，隨後被 Cursor 取代"
+       ],
+       [
+        "1rrlhlr:F1",
+        "半導體背景的獨立開發者 9 個月內用 AI vibe coding 做 4 款產品、總收入 0 美元，每次上線後"
+       ]
+      ]
+     },
+     "lesson": "正面對上通用模型，你贏的是那個月，輸的是下一次發表會"
+    },
+    {
+     "text": "只做一個具體行業，把它做到沒人比你懂",
+     "tier": "good",
+     "d": {
+      "cash": -200,
+      "users": 25,
+      "mrr": 330,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式8",
+      "n": 6,
+      "up": 3,
+      "name": "深耕小眾利基，避開跟大型玩家的正面競爭",
+      "caution": "這些案例的收入規模普遍偏小，多在數十到數千美元 MRR，資料中沒有出現深耕小眾後規模化到企業級收入的同類",
+      "cases": [
+       [
+        "1ssvm2r:C8",
+        "Bank Statement Converter：專做銀行對帳單轉檔給記帳員／會計師，29 名付費客戶"
+       ],
+       [
+        "1oabnmd:C5",
+        "避開企業級市場專注中小企業，5 年無會議自助式獲利"
+       ]
+      ]
+     },
+     "lesson": "AI 應是加值層而非產品核心"
+    },
+    {
+     "text": "把 AI 藏起來，只講你幫客戶解決的那件事",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": 30,
+      "mrr": 290
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式4",
+      "n": 21,
+      "name": "同質 AI 工具氾濫，無法讓人相信「我不一樣」",
+      "cases": [
+       [
+        "1tk50gs:F1",
+        "AI 面試 B2B SaaS，因市場上已有大量同類軟體而停止開發"
+       ],
+       [
+        "1s5qk7k:F1",
+        "白牌 AI 聊天機器人 12 個月、200 註冊、0 美元收入"
+       ]
+      ]
+     },
+     "lesson": "「不再追逐趨勢，先弄清自己擅長什麼、什麼值得打造」"
+    }
+   ]
+  },
+  {
+   "id": "a-scrape",
+   "phase": 2,
+   "title": "你的差異化，是別人不讓你做的事",
+   "scene": "競品拿不到的資料，你拿得到——因為你直接抓。\n這個月被偵測封鎖了三次，你每次換個手法就繞過去了。",
+   "tracks": [
+    "b2b",
+    "ai"
+   ],
+   "options": [
+    {
+     "text": "繼續抓，這就是護城河",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 80,
+      "mrr": 260
+     },
+     "flag": "scraping",
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1k20pzp:F3",
+        "汽車列表抓取專案持續被目標網站封鎖，研究後發現同類抓取業務曾被起訴敗訴倒閉，3 週後主動停止"
+       ],
+       [
+        "1snd4t4:F1",
+        "Apollo Scraper：曾有 50 名活躍用戶的 Apollo email 擷取工具，遭封鎖網站並將網域從 Hostinger 移除"
+       ]
+      ]
+     },
+     "lesson": "不該把生意建立在沒有權利使用的資料上"
+    },
+    {
+     "text": "加大抓取規模，趁還能抓先衝用戶",
+     "tier": "bad",
+     "d": {
+      "cash": -300,
+      "fixed": 120,
+      "users": 140,
+      "mrr": 320
+     },
+     "flag": "scraping",
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1ritlj2:F3",
+        "獨自開發的 LinkedIn 爬蟲產品，收到兩封 cease-and-desist 律師函後終止"
+       ],
+       [
+        "1ock4x2:F1",
+        "未使用自動化功能的 LinkedIn 工具曾帶來數十萬美元淨收入，法務行動後判斷無力對抗而結束"
+       ]
+      ]
+     },
+     "lesson": "「缺乏法律資源時，在大型平台規則之上構建產品風險極高」"
+    },
+    {
+     "text": "改用官方 API 拿得到的部分，重新定義價值",
+     "tier": "good",
+     "d": {
+      "cash": -350,
+      "users": 30,
+      "mrr": 300
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1ock4x2:F1",
+        "LinkedIn 工具曾帶來數十萬美元淨收入，法務行動後判斷無力對抗而結束"
+       ],
+       [
+        "1snd4t4:F1",
+        "Apollo Scraper：50 名活躍用戶，遭封鎖網站並移除網域"
+       ]
+      ]
+     },
+     "lesson": "「如果對方明天發一封律師函要求停止，我有沒有合法的備援商業模式？」"
+    },
+    {
+     "text": "轉做完全不依賴抓取的那一塊功能",
+     "tier": "good",
+     "d": {
+      "cash": -400,
+      "users": 20,
+      "mrr": 280,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ],
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師，流失率 2.1% vs 8.3%"
+       ]
+      ]
+     },
+     "lesson": "建立在別人平台上的差異化，隨時可以被收回"
+    }
+   ]
+  },
+  {
+   "id": "c-funnel",
+   "phase": 3,
+   "title": "轉換率 0.3%",
+   "scene": "你覺得是價格太貴。\n你沒有看過漏斗的任何一段數字。",
+   "options": [
+    {
+     "text": "降價",
+     "tier": "bad",
+     "d": {
+      "cash": -100,
+      "users": 70,
+      "mrr": -60,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ],
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶，LTV:CAC 僅 1.4"
+       ]
+      ]
+     },
+     "lesson": "在不知道流失點在哪之前，降價只是猜"
+    },
+    {
+     "text": "加功能，可能是功能不夠",
+     "tier": "bad",
+     "d": {
+      "cash": -900,
+      "fixed": 100
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式1",
+      "n": 38,
+      "name": "曝光／流量／候補名單看起來不錯，轉換卻趨近於零，且創辦人尚未拆解漏斗找出真正流失點",
+      "cases": [
+       [
+        "1kvbbbd:F1",
+        "MacroLookup：首次 Reddit 廣告獲 120 次點擊，註冊數為零"
+       ],
+       [
+        "1r216sd:F1",
+        "Oden：756 位訪客僅 2 位註冊，轉換極其有限"
+       ]
+      ]
+     },
+     "lesson": "不應憑猜測假設問題出在哪，應先用實際數據確認流失發生在哪一步"
+    },
+    {
+     "text": "先把漏斗每一段的數字拆出來看",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": 15,
+      "mrr": 380,
+      "churn": -2
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "啟用／轉換",
+      "pat": "模式4",
+      "n": 20,
+      "name": "付費牆／結帳流程本身才是流失點，而非產品不好",
+      "cases": [
+       [
+        "1vh45kg:F1",
+        "Ajedrez Learn Chess：47% 安裝用戶最後看到的畫面是付款牆，付款牆頁面中位數停留時間僅 8 秒"
+       ],
+       [
+        "1vzkr86:F1",
+        "22 次試用點擊中 17 次在原生結帳彈窗處放棄"
+       ]
+      ]
+     },
+     "lesson": "價格與付費牆的變更應像部署程式碼一樣被測量"
+    },
+    {
+     "text": "直接打給最近流失的 10 個人問",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 10,
+      "mrr": 320,
+      "churn": -3
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式4",
+      "n": 12,
+      "up": 3,
+      "name": "親自和早期使用者一對一對話（訪談、通話、私訊），而非發問卷",
+      "caution": "DesignQA 作者訪談 40+ 位設計師與 PM 得到正面回饋，產品上線後使用量極低、幾乎沒有用戶實際使用",
+      "cases": [
+       [
+        "1s86kkk:C1",
+        "FeedbackQueue：構思階段與 3,300+ 人面對面溝通，3 週轉化 414 人，後達 profitability"
+       ],
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：找已為爛方案付費的 15 人談，達到 sustained_revenue"
+       ]
+      ]
+     },
+     "lesson": "流失的人知道原因，你的分析工具不知道"
+    }
+   ]
+  },
+  {
+   "id": "c-onboarding",
+   "phase": 3,
+   "title": "前三分鐘",
+   "scene": "註冊之後的前三分鐘，60% 的人消失。\n剩下的人裡，大部分只建了一筆資料就離開。",
+   "options": [
+    {
+     "text": "寄召回 email",
+     "tier": "bad",
+     "d": {
+      "cash": -150,
+      "users": 20,
+      "churn": 2
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式2",
+      "n": 29,
+      "name": "使用者註冊或下載後，從未完成啟用產品所需的第一個關鍵動作，卡在 onboarding、看不到「aha moment」",
+      "cases": [
+       [
+        "1riyr34:F15",
+        "onboarding 前 3 分鐘流失 60% 的註冊用戶"
+       ],
+       [
+        "1rg24rr:F1",
+        "Loggd：多數註冊用戶只建 1 個習慣或瀏覽後離開，未到達感受價值的時間點"
+       ]
+      ]
+     },
+     "lesson": "把沒感受到價值的人叫回來，他還是感受不到"
+    },
+    {
+     "text": "先做新功能，老用戶之後再說",
+     "tier": "bad",
+     "d": {
+      "cash": -800,
+      "fixed": 120,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式2",
+      "n": 29,
+      "name": "使用者註冊或下載後，從未完成啟用產品所需的第一個關鍵動作，卡在 onboarding、看不到「aha moment」",
+      "cases": [
+       [
+        "1rg24rr:F1",
+        "Loggd：多數註冊用戶只建 1 個習慣或瀏覽後離開"
+       ],
+       [
+        "1riyr34:F15",
+        "onboarding 前 3 分鐘流失 60%"
+       ]
+      ]
+     },
+     "lesson": "「應先與流失用戶對話，而非先花時間做沒人要求的新功能」"
+    },
+    {
+     "text": "砍掉 60% 的入門步驟，讓人三分鐘內看到結果",
+     "tier": "good",
+     "d": {
+      "cash": -160,
+      "users": 30,
+      "mrr": 420,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能",
+      "cases": [
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ],
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費"
+       ]
+      ]
+     },
+     "lesson": "修好入門清單可能只需幾天"
+    },
+    {
+     "text": "前 20 位新用戶，你親自手把手帶一次",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": 12,
+      "mrr": 300,
+      "churn": -3
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式8",
+      "n": 8,
+      "up": 3,
+      "name": "先用人工、不可規模化的方式服務最初幾位客戶，之後才自動化",
+      "caution": "這是早期少量客戶時才可行的做法，規模擴大後仍堅持高接觸服務會拖慢成長速度",
+      "cases": [
+       [
+        "1md4hd3:C3",
+        "未命名 SaaS：先在自家企業內部測試、第一年僅靠熟人拿 5 位客戶，後達 ARR $1M"
+       ],
+       [
+        "1jv1ph6:C1",
+        "Superwrapper：獲得足夠用戶後才安排訪談，一個月內轉為獲利"
+       ]
+      ]
+     },
+     "lesson": "你帶過 20 次，就知道自動化該擋掉哪一步"
+    }
+   ]
+  },
+  {
+   "id": "c-paywall",
+   "phase": 3,
+   "title": "47% 的人最後看到的畫面是付費牆",
+   "scene": "付費牆頁面的中位數停留時間：8 秒。\n沒有捲動。",
+   "tracks": [
+    "b2c",
+    "ai"
+   ],
+   "options": [
+    {
+     "text": "降價",
+     "tier": "bad",
+     "d": {
+      "cash": -80,
+      "users": 90,
+      "mrr": -80,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ],
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶"
+       ]
+      ]
+     },
+     "lesson": "8 秒不是在考慮價格，是根本沒讀"
+    },
+    {
+     "text": "乾脆拿掉付費牆，先養用戶",
+     "tier": "bad",
+     "d": {
+      "cash": -100,
+      "users": 180,
+      "mrr": -140,
+      "churn": 5
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式6",
+      "n": 7,
+      "name": "免費太久、起步不敢收費，之後很難再要求用戶付費",
+      "cases": [
+       [
+        "1nspmh8:F4",
+        "消費者產品獲得大量讚美卻零收入，同期經營的 B2B 工作流軟體 8 個月做到 $15k MRR"
+       ],
+       [
+        "1utpefk:F1",
+        "一站式 App 累計投入逾 2,500 小時，後才領悟用戶不會因投入工時而付費"
+       ]
+      ]
+     },
+     "lesson": "若沒有廣告收入或創投支持，應盡快讓產品開始收費"
+    },
+    {
+     "text": "把付費牆當程式碼測：一次只改一個變數，看數字",
+     "tier": "good",
+     "d": {
+      "cash": -120,
+      "users": -30,
+      "mrr": 430,
+      "churn": -3
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "啟用／轉換",
+      "pat": "模式4",
+      "n": 20,
+      "name": "付費牆／結帳流程本身才是流失點，而非產品不好",
+      "cases": [
+       [
+        "1vh45kg:F1",
+        "Ajedrez Learn Chess：47% 安裝用戶最後看到的畫面是付款牆，中位數停留 8 秒"
+       ],
+       [
+        "1vzkr86:F1",
+        "48 位關閉付費牆的用戶中 36 位選擇留在免費方案，22 次試用點擊中 17 次在原生結帳彈窗處放棄"
+       ]
+      ]
+     },
+     "lesson": "移除付款牆的關閉按鈕、改加短期免費試用後，點擊率從 2.9% 升到 18.5%"
+    },
+    {
+     "text": "改成短期試用，但要綁卡",
+     "tier": "good",
+     "d": {
+      "cash": -90,
+      "users": -50,
+      "mrr": 400,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式2",
+      "n": 9,
+      "up": 4,
+      "name": "拿掉免費方案、收緊免費層級，或試用要求先綁信用卡",
+      "caution": "FeedbackQueue 作者明確表示實施硬性付費牆會扼殺平台的成長，因此選擇保留免費層級",
+      "cases": [
+       [
+        "1mb5blw:C1",
+        "Tydal 用須綁卡的 3 天試用驅動轉換（sustained_revenue）"
+       ],
+       [
+        "1oabnmd:C3",
+        "VoiceMate 完全不設試用，12 個月內有 100 多位付費用戶"
+       ]
+      ]
+     },
+     "lesson": "綁卡會趕走一堆人，留下的那些是真的"
+    }
+   ]
+  },
+  {
+   "id": "c-free-tier",
+   "phase": 3,
+   "title": "免費額度 10 次",
+   "scene": "850 個用戶。多數人用了 4 次就不回來了。\n付費 6 人。",
+   "options": [
+    {
+     "text": "把免費額度加到 20 次，讓他們更有感",
+     "tier": "bad",
+     "d": {
+      "cash": -120,
+      "users": 220,
+      "churn": 5
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式6",
+      "n": 11,
+      "name": "免費方案／免費額度設計得太慷慨，使用者已滿足需求後沒有付費誘因",
+      "cases": [
+       [
+        "1rm0c2a:F1",
+        "canvix：850 名用戶中多數用完 10 個免費 Pro 額度後不再回訪"
+       ],
+       [
+        "1hs7hap:F1",
+        "3 個免費額度已足夠多數人用完產品，導致無人付費，且有用戶重複註冊以再獲免費額度"
+       ]
+      ]
+     },
+     "lesson": "「免費層必須設有更明確的限制，才能真正創造付費客戶」"
+    },
+    {
+     "text": "放著，用戶數字好看",
+     "tier": "bad",
+     "d": {
+      "cash": -60,
+      "users": 150,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "留存／頻率",
+      "pat": "模式2",
+      "n": 10,
+      "name": "免費方案／免費額度被榨乾即消失，幾乎不轉換付費",
+      "cases": [
+       [
+        "1vaqytm:F3",
+        "credits 免費額度機制，用戶做 4–5 次操作就離開，遠早於額度上限"
+       ],
+       [
+        "1n6dwjl:F2",
+        "B2C AI 圖像平台，上線兩天 20 名使用者全部未回訪，只用免費額度"
+       ]
+      ]
+     },
+     "lesson": "「大量隨機註冊用戶若不願付費並無意義」"
+    },
+    {
+     "text": "看清楚：他們在第 4 次就走了，免費額度根本不是瓶頸",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": -40,
+      "mrr": 400,
+      "churn": -3
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "留存／頻率",
+      "pat": "模式2",
+      "n": 10,
+      "name": "免費方案／免費額度被榨乾即消失，幾乎不轉換付費",
+      "cases": [
+       [
+        "1vaqytm:F3",
+        "credits 免費額度機制，用戶做 4–5 次操作就離開，遠早於額度上限"
+       ],
+       [
+        "1n6dwjl:F2",
+        "B2C AI 圖像平台，上線兩天 20 名使用者全部未回訪"
+       ]
+      ]
+     },
+     "lesson": "該在意的是真實用戶是否會到達額度用完的那個點，而不是免費方案裡放了什麼"
+    },
+    {
+     "text": "直接拿掉免費方案",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": -120,
+      "mrr": 460,
+      "churn": -5
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式2",
+      "n": 9,
+      "up": 4,
+      "name": "拿掉免費方案、收緊免費層級，或試用要求先綁信用卡",
+      "caution": "FeedbackQueue 作者明確表示實施硬性付費牆會扼殺平台的成長，因此選擇保留免費層級",
+      "cases": [
+       [
+        "1qlglwd:C1",
+        "Videoyards 拿掉免費方案才有第一位付費客戶（exit）"
+       ],
+       [
+        "1ngumpo:C1",
+        "StarterPilot 把無限期免費方案改成 7 天試用（exit）"
+       ]
+      ]
+     },
+     "lesson": "Videoyards 只有免費方案時完全沒有收入"
+    }
+   ]
+  },
+  {
+   "id": "c-ai-cost",
+   "phase": 3,
+   "title": "這個月的 API 帳單超過你的房租",
+   "scene": "免費用戶佔流量 57%。\n他們貢獻的收入是 $0。",
+   "tracks": [
+    "ai"
+   ],
+   "options": [
+    {
+     "text": "先吸收，用戶成長比較重要",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 260,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式1",
+      "n": 41,
+      "name": "免費方案／免費試用的 AI 與雲端成本失控，收入完全追不上",
+      "cases": [
+       [
+        "1pn7abg:F1",
+        "免費方案佔 57% 流量卻零收入，每月約 $1,900 基礎設施成本由付費收入補貼"
+       ],
+       [
+        "1swzw6n:F1",
+        "AI 功能上線後 token 用量遠超預期，API 帳單超過房租與伺服器成本三倍以上"
+       ]
+      ]
+     },
+     "lesson": "用戶成長在這裡等於成本成長"
+    },
+    {
+     "text": "每個查詢都換成最強的模型，品質先做好",
+     "tier": "bad",
+     "d": {
+      "cash": -400,
+      "fixed": 260,
+      "users": 80
+     },
+     "ref": {
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式3",
+      "n": 21,
+      "name": "推論／API 成本被免費用戶或重度用戶吃掉",
+      "cases": [
+       [
+        "1swzw6n:F1",
+        "加入 AI 功能三個月後 API 帳單超過房租，成為最大開支"
+       ],
+       [
+        "1uihxer:F1",
+        "每次生成成本 4–5 美元、6 美元付費牆前轉換極差，靠個人積蓄支撐"
+       ]
+      ]
+     },
+     "lesson": "「不應把每個簡單查詢都交給最貴的模型處理」"
+    },
+    {
+     "text": "按功能拆解成本，把便宜的查詢換小模型",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "fixed": -180,
+      "mrr": 330
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式3",
+      "n": 21,
+      "name": "推論／API 成本被免費用戶或重度用戶吃掉",
+      "cases": [
+       [
+        "1swzw6n:F1",
+        "加入 AI 功能三個月後 API 帳單超過房租，成為最大開支"
+       ],
+       [
+        "1uihxer:F1",
+        "每次生成成本 4–5 美元、6 美元付費牆前轉換極差"
+       ]
+      ]
+     },
+     "lesson": "「按功能拆解成本，找出最耗成本的工作流程」"
+    },
+    {
+     "text": "把免費層收掉，讓成本跟著付費走",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": -200,
+      "mrr": 480,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式2",
+      "n": 9,
+      "up": 4,
+      "name": "拿掉免費方案、收緊免費層級，或試用要求先綁信用卡",
+      "caution": "FeedbackQueue 作者明確表示實施硬性付費牆會扼殺平台的成長，因此選擇保留免費層級",
+      "cases": [
+       [
+        "1oabnmd:C3",
+        "VoiceMate 完全不設試用，12 個月內有 100 多位付費用戶"
+       ],
+       [
+        "1qlglwd:C1",
+        "Videoyards 拿掉免費方案才有第一位付費客戶（exit）"
+       ]
+      ]
+     },
+     "lesson": "每個免費用戶都在花你的錢時，免費就不是行銷"
+    }
+   ]
+  },
+  {
+   "id": "c-price-low",
+   "phase": 3,
+   "title": "$12 / 月",
+   "scene": "每月 280 張客服工單。\n流失率 29%。",
+   "options": [
+    {
+     "text": "加客服人力",
+     "tier": "bad",
+     "d": {
+      "cash": -500,
+      "fixed": 400
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ],
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶，LTV:CAC 僅 1.4"
+       ]
+      ]
+     },
+     "lesson": "低價吸引來的客服成本，不會因為多請人而消失"
+    },
+    {
+     "text": "降到 $6，用量把客單價補回來",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 200,
+      "mrr": -100,
+      "churn": 6
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式3",
+      "n": 8,
+      "name": "定價過低，吸引到不付得起、易流失或濫用資源的客戶",
+      "cases": [
+       [
+        "1v398co:F5",
+        "$19/mo 起步價吸引到一遇摩擦即流失的客戶，漲到 $49 後 LTV:CAC 從 1.4 升至 3.1"
+       ],
+       [
+        "1rxzv8t:F1",
+        "$12/月吸引到不認真客戶，每月 280+ 客服工單、29% 流失率，後改為 $79/月"
+       ]
+      ]
+     },
+     "lesson": "「低價吸引休閒／不認真用戶，高價才吸引真正的目標客群」"
+    },
+    {
+     "text": "漲到 $79",
+     "tier": "good",
+     "d": {
+      "cash": -60,
+      "users": -90,
+      "mrr": 520,
+      "churn": -6
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式3",
+      "n": 6,
+      "up": 5,
+      "name": "漲價後流失率不升反降、營收與客單價同步上升",
+      "caution": "Common_Dream9420 執行類似漲價策略後立即失去 40% 的客戶，6 個月後收入才回升——漲價當下確實先付出明顯代價",
+      "cases": [
+       [
+        "1qh7dws:C2",
+        "StockAlert.pro 漲價後月流失率從約 40% 降到低於 8%（profitability）"
+       ],
+       [
+        "1v38zxz:C3",
+        "B2B SaaS 漲價後 10 週內流失率 6.2%→3.8%，兩季後 LTV:CAC 從 1.4 升到 3.1"
+       ]
+      ]
+     },
+     "lesson": "注意：這 6 個人可能本來就有穩定客戶才敢漲，因果方向分不出來"
+    },
+    {
+     "text": "只留少數願意付高價的客戶，其他放掉",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": -140,
+      "mrr": 480,
+      "churn": -5
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式7",
+      "n": 6,
+      "up": 3,
+      "name": "只服務少數高單價／企業客戶，而非大量低價自助客戶",
+      "caution": "Paid App Review Service 單筆最低收 $250、累積約 70 次評測、營收近 $1 萬，但扣掉付給評測者的 70% 佣金後所剩不多",
+      "cases": [
+       [
+        "1hqxi8b:C2",
+        "Deep tech SaaS 靠約 10 名用戶做到 $20 萬 ARR、後破 $1M ARR"
+       ],
+       [
+        "1o4xz7a:C3",
+        "Self-service SaaS 企業合約貢獻逾 $10 萬 ARR"
+       ]
+      ]
+     },
+     "lesson": "10 個對的客戶，比 500 個錯的客戶好養"
+    }
+   ]
+  },
+  {
+   "id": "c-ghosting",
+   "phase": 3,
+   "title": "「下週簽」",
+   "scene": "三個潛在客戶都這樣說。\n三週過去，沒有人回訊息。",
+   "tracks": [
+    "b2b",
+    "agency"
+   ],
+   "options": [
+    {
+     "text": "繼續跟進，再等等",
+     "tier": "bad",
+     "d": {
+      "cash": -250
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式5",
+      "n": 12,
+      "name": "潛在客戶口頭表示有興趣或會付費，事後卻消失、不回應（Ghosting）",
+      "cases": [
+       [
+        "1vsh01t:F1",
+        "朋友口頭承諾一定會付費，拿到 Stripe 付款連結後隨即失去聯繫"
+       ],
+       [
+        "1jdtcdq:F1",
+        "ExamAi：受訪者都說願意使用，實際上沒有人使用，發文時用戶數為零"
+       ]
+      ]
+     },
+     "lesson": "「實際掏錢是唯一不會說謊的驗證方式」"
+    },
+    {
+     "text": "給他們更長的免費試用，降低決策壓力",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 8,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式6",
+      "n": 7,
+      "name": "免費太久、起步不敢收費，之後很難再要求用戶付費",
+      "cases": [
+       [
+        "1nspmh8:F4",
+        "消費者產品獲得大量讚美卻零收入，同期 B2B 工作流軟體 8 個月做到 $15k MRR"
+       ],
+       [
+        "1utpefk:F1",
+        "一站式 App 累計投入逾 2,500 小時，後才領悟用戶不會因投入工時而付費"
+       ]
+      ]
+     },
+     "lesson": "拖越久，簽約的理由越不急迫"
+    },
+    {
+     "text": "寄付款連結，能付才算數",
+     "tier": "good",
+     "d": {
+      "cash": -40,
+      "users": 3,
+      "mrr": 440
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式6",
+      "n": 12,
+      "up": 0,
+      "name": "把「陌生人付錢」當成唯一算數的驗證訊號，親友捧場不算",
+      "caution": "Autenda 作者明確提醒「測試早期付費意願是有用的，但警告不要將低價位的少量付費視為對實際定價模式的驗證」",
+      "cases": [
+       [
+        "1uzw46v:C1",
+        "Rendrio：陌生人選最慢選項看完後付 $9，作者視為比朋友讚更有意義的驗證"
+       ],
+       [
+        "1r6666m:C1",
+        "shippipe.app：MVP 完成前就有 3 位付費用戶，作者強調陌生人付費比朋友讚美重要"
+       ]
+      ]
+     },
+     "lesson": "口頭承諾的轉換率是 0，付款連結至少會給你答案"
+    },
+    {
+     "text": "改去找已經在付錢用爛工具的人",
+     "tier": "good",
+     "d": {
+      "cash": -180,
+      "users": 6,
+      "mrr": 560,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "驗證",
+      "pat": "模式7",
+      "n": 8,
+      "up": 3,
+      "name": "冷外聯（冷 DM／冷 Email／LinkedIn）鎖定已知有需求或在用競品的人",
+      "caution": "GentleInvoice 作者持續接觸潛在客戶、安排通話，收入仍停滯在 $250 MRR 好幾個月",
+      "cases": [
+       [
+        "1w4hp89:C1",
+        "南非 B2B SaaS：逐一致電 200+ 企業找出未使用方案者，4 年後以 600 萬美元出售"
+       ],
+       [
+        "1j0w1ys:C1",
+        "未命名 B2B（律師/公證人）：寄實體包裹開發信，90 天內鎖定 50 萬瑞郎合約"
+       ]
+      ]
+     },
+     "lesson": "已經在付錢的人，決策只是換供應商，不是新增預算"
+    }
+   ]
+  },
+  {
+   "id": "c-ltd",
+   "phase": 3,
+   "title": "AppSumo 找上門",
+   "scene": "$59 終身方案。他們說可以賣 500 份。\n那是 $29,500，現在就進帳。",
+   "tracks": [
+    "b2c",
+    "ai",
+    "b2b"
+   ],
+   "options": [
+    {
+     "text": "全賣，現金先進來",
+     "tier": "bad",
+     "d": {
+      "cash": 9000,
+      "users": 340,
+      "fixed": 420,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式4",
+      "n": 8,
+      "name": "終身方案（LTD）／AppSumo 把未來收入賤賣，服務成本卻持續產生",
+      "cases": [
+       [
+        "1s5uwde:F1",
+        "$59 終身方案賣出 340 份，18 個月後每月服務成本仍達 $2,800"
+       ],
+       [
+        "1pcd2ka:F1",
+        "兩週內賣出 340 個終身授權，18 個月後問題仍未解決，稱是永久虧損"
+       ]
+      ]
+     },
+     "lesson": "「絕不對有持續伺服器成本的產品提供終身授權」"
+    },
+    {
+     "text": "賣，而且加碼做無限用量吸引更多人",
+     "tier": "bad",
+     "d": {
+      "cash": 11000,
+      "users": 480,
+      "fixed": 700,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式1",
+      "n": 41,
+      "name": "免費方案／免費試用的 AI 與雲端成本失控，收入完全追不上",
+      "cases": [
+       [
+        "1pn7abg:F1",
+        "免費方案佔 57% 流量卻零收入，每月約 $1,900 基礎設施成本由付費收入補貼"
+       ],
+       [
+        "1pn7abg:F1",
+        "免費方案佔 57% 流量卻零收入，每月約 $1,900 基礎設施成本由付費收入補貼"
+       ]
+      ]
+     },
+     "lesson": "一次性收入配上永久成本，是最貴的那種現金"
+    },
+    {
+     "text": "嚴格限量 50 份",
+     "tier": "ok",
+     "d": {
+      "cash": 2100,
+      "users": 50,
+      "fixed": 60,
+      "mrr": 40
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式1",
+      "n": 15,
+      "up": 3,
+      "name": "把訂閱制改成一次性買斷或終身方案（Lifetime Deal）",
+      "caution": "Filtera 用 $8.9 一次性定價，轉換率僅 0.7%，作者認為和使用者對訂閱的排斥心理糾結在一起，反而考慮改回訂閱制",
+      "cases": [
+       [
+        "1jq97h6:C1",
+        "Picyard 把年費訂閱改終身買斷後出售（exit）"
+       ],
+       [
+        "1kv9nx8:C1",
+        "WaitlistNow 用 $19 終身方案取代訂閱"
+       ]
+      ]
+     },
+     "lesson": "多位當事人一致建議：要做就嚴格限量，多人提到最多 50 份"
+    },
+    {
+     "text": "拒絕，改推折扣年繳",
+     "tier": "good",
+     "d": {
+      "cash": 1600,
+      "users": 30,
+      "mrr": 460,
+      "churn": -3
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "定價／成本",
+      "pat": "模式4",
+      "n": 8,
+      "name": "終身方案（LTD）／AppSumo 把未來收入賤賣，服務成本卻持續產生",
+      "cases": [
+       [
+        "1s5uwde:F1",
+        "$59 終身方案賣出 340 份，18 個月後每月服務成本仍達 $2,800"
+       ],
+       [
+        "1pcd2ka:F1",
+        "兩週內賣出 340 個終身授權，18 個月後稱是永久虧損"
+       ]
+      ]
+     },
+     "lesson": "「應改提供折扣年繳方案，既拿到預付現金又保留續約可能」"
+    }
+   ]
+  },
+  {
+   "id": "c-one-time-use",
+   "phase": 3,
+   "title": "平均使用次數：2",
+   "scene": "用戶用兩次，然後再也不回來。\n你的定價是月費。",
+   "tracks": [
+    "b2c",
+    "ai"
+   ],
+   "options": [
+    {
+     "text": "加簽到獎勵跟連續使用徽章",
+     "tier": "bad",
+     "d": {
+      "cash": -500,
+      "users": 60,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "留存／頻率",
+      "pat": "模式1",
+      "n": 20,
+      "name": "用完即走的低頻/一次性需求工具，被套上訂閱制",
+      "cases": [
+       [
+        "1w2hel8:F1",
+        "Tinder bio 產生器，用戶買一次用幾個月後不再需要，訂閱模式不合適"
+       ],
+       [
+        "1qa4zea:F1",
+        "fyltr.co AI 表單工具，用戶 2 個月後流失，作者認為訂閱制與偶發使用不匹配"
+       ]
+      ]
+     },
+     "lesson": "低頻需求不會因為徽章變高頻"
+    },
+    {
+     "text": "加更多功能製造回訪的理由",
+     "tier": "bad",
+     "d": {
+      "cash": -850,
+      "fixed": 130,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "留存／頻率",
+      "pat": "模式1",
+      "n": 20,
+      "name": "用完即走的低頻/一次性需求工具，被套上訂閱制",
+      "cases": [
+       [
+        "1viuhbg:F1",
+        "CountdownShare 上線 8 個月，每日 100+ 個倒數計時但付費轉化幾乎為零"
+       ],
+       [
+        "1qa4zea:F1",
+        "fyltr.co AI 表單工具，用戶 2 個月後流失"
+       ]
+      ]
+     },
+     "lesson": "用完即走的工具，多做的功能一樣沒人回來用"
+    },
+    {
+     "text": "改成一次性買斷",
+     "tier": "good",
+     "d": {
+      "cash": 1200,
+      "users": 20,
+      "mrr": 300,
+      "churn": -6
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式1",
+      "n": 15,
+      "up": 3,
+      "name": "把訂閱制改成一次性買斷或終身方案（Lifetime Deal）",
+      "caution": "Filtera 用 $8.9 一次性定價，轉換率僅 0.7%，作者反而考慮改回訂閱制；Textbuddy 作者認為終身交易不可持續",
+      "cases": [
+       [
+        "1o32j9p:C1",
+        "SalaryScript 純一次性定價（均價約 $100），累積利潤逾 $6 萬（profitability）"
+       ],
+       [
+        "1rgxkm8:C1",
+        "Mac Updater Pro 拒絕訂閱制，90 天賣出 250+ 授權"
+       ]
+      ]
+     },
+     "lesson": "產品是「解決一次性任務」時，月費是在跟現實吵架"
+    },
+    {
+     "text": "換一群每週都會用到的人",
+     "tier": "good",
+     "d": {
+      "cash": -250,
+      "users": 15,
+      "mrr": 420,
+      "churn": -7
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師（流失率 2.1% vs 健身教練 8.3%）"
+       ],
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ]
+      ]
+     },
+     "lesson": "同一個工具，換一群使用頻率不同的人，就換了一個商業模式"
+    }
+   ]
+  },
+  {
+   "id": "r-burnout",
+   "phase": 4,
+   "title": "你上一次睡滿六小時是九月",
+   "scene": "你同時是工程、客服、行銷、會計、維運。\n你上一次睡滿六小時是九月。",
+   "options": [
+    {
+     "text": "撐完這一季再說",
+     "tier": "bad",
+     "d": {
+      "cash": -300,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式3",
+      "n": 26,
+      "name": "獨自扛下開發、行銷、客服、維運全部角色，身心過勞或健康危機迫使停止",
+      "cases": [
+       [
+        "1hzde4a:F1",
+        "Adspott 獨自開發近兩年後推出，因獨自開發耗盡精力導致倦怠並忽略業務其他面向"
+       ],
+       [
+        "1kn7cz4:F1",
+        "21 歲獨立開發者因胃癌失業、健康惡化且財務困窘"
+       ]
+      ]
+     },
+     "lesson": "「一切依賴個人告警設置和作息的業務不是真正的業務」"
+    },
+    {
+     "text": "再開一個新專案換心情",
+     "tier": "bad",
+     "d": {
+      "cash": -600,
+      "fixed": 150,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式6",
+      "n": 12,
+      "name": "同時經營多個專案、不斷追逐新點子，樣樣做不好",
+      "cases": [
+       [
+        "1i0d34r:F1",
+        "獨自開發網站三年，客戶不到 5 人，失去動力後不斷轉向新專案"
+       ],
+       [
+        "1vp93l0:F2",
+        "共 9 款 App 上架，除一款外皆不再積極開發，合計零訂閱收入"
+       ]
+      ]
+     },
+     "lesson": "忙碌但破產的陷阱"
+    },
+    {
+     "text": "設工時上限、把告警自動化，先讓這件事可持續",
+     "tier": "good",
+     "d": {
+      "cash": -300,
+      "fixed": 80,
+      "mrr": 380,
+      "churn": -3
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "執行資源不足",
+      "pat": "模式3",
+      "n": 26,
+      "name": "獨自扛下開發、行銷、客服、維運全部角色，身心過勞或健康危機迫使停止",
+      "cases": [
+       [
+        "1hzde4a:F1",
+        "Adspott 獨自開發近兩年後推出，因耗盡精力導致倦怠"
+       ],
+       [
+        "1kn7cz4:F1",
+        "21 歲獨立開發者因胃癌失業、健康惡化且財務困窘"
+       ]
+      ]
+     },
+     "lesson": "「需要自動化與告警升級機制；未經測試恢復的備份不算備份」"
+    },
+    {
+     "text": "砍掉一半功能，把維護面縮小",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": -30,
+      "mrr": 420,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能",
+      "cases": [
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費，8 個月 $2K MRR"
+       ],
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ]
+      ]
+     },
+     "lesson": "你要維護的每一行程式碼，都是你之後要付的班"
+    }
+   ]
+  },
+  {
+   "id": "r-quit-job",
+   "phase": 4,
+   "title": "MRR $340",
+   "scene": "你在考慮把正職辭掉，全力投入。\n存款可以撐八個月。",
+   "options": [
+    {
+     "text": "辭，破釜沉舟才會拼",
+     "tier": "bad",
+     "d": {
+      "cash": -400,
+      "fixed": 900
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式2",
+      "n": 36,
+      "name": "辭職全職投入，燒光個人積蓄或跑道，被迫接案或重返職場",
+      "cases": [
+       [
+        "1r692k3:F1",
+        "技術創辦人（開發者/前CTO）辭職全職創業，燒光runway，最終靠自由接案維生"
+       ],
+       [
+        "1t2m8h3:F1",
+        "獨立開發者僅剩約兩個月伺服器費用，若短期內無成長即須關閉"
+       ]
+      ]
+     },
+     "lesson": "「在 MRR 穩定覆蓋生活費（多人建議至少約 $5,000/月）之前不應辭去全職工作」"
+    },
+    {
+     "text": "辭職，同時接案養活自己",
+     "tier": "bad",
+     "d": {
+      "cash": 600,
+      "fixed": 500,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式6",
+      "n": 12,
+      "name": "同時經營多個專案、不斷追逐新點子，樣樣做不好",
+      "cases": [
+       [
+        "1i0d34r:F1",
+        "獨自開發網站三年，客戶不到 5 人，不斷轉向新專案"
+       ],
+       [
+        "1vp93l0:F2",
+        "共9款App上架，除一款外其餘皆已不再積極開發，合計零訂閱收入，作者坦承從不淘汰舊專案"
+       ]
+      ]
+     },
+     "lesson": "接案會先吃掉你要拿來做產品的那幾個小時"
+    },
+    {
+     "text": "不辭。保留收入，把週末的時間全部押在分發上",
+     "tier": "good",
+     "d": {
+      "cash": -80,
+      "users": 25,
+      "mrr": 360
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "執行資源不足",
+      "pat": "模式2",
+      "n": 36,
+      "name": "辭職全職投入，燒光個人積蓄或跑道，被迫接案或重返職場",
+      "cases": [
+       [
+        "1r692k3:F1",
+        "技術創辦人（開發者/前CTO）辭職全職創業，燒光runway，最終靠自由接案維生"
+       ],
+       [
+        "1t2m8h3:F1",
+        "僅剩約兩個月伺服器費用，若短期內無成長即須關閉"
+       ]
+      ]
+     },
+     "lesson": "「重新開始時應保持穩定收入來源、外包開發，自己專注於分發」"
+    },
+    {
+     "text": "設一個明確的數字：MRR 到多少才辭",
+     "tier": "ok",
+     "d": {
+      "cash": -50,
+      "users": 15,
+      "mrr": 180
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "執行資源不足",
+      "pat": "模式2",
+      "n": 36,
+      "name": "辭職全職投入，燒光個人積蓄或跑道，被迫接案或重返職場",
+      "cases": [
+       [
+        "1t2m8h3:F1",
+        "第三世界國家獨立開發者，僅剩約兩個月伺服器費用"
+       ],
+       [
+        "1r692k3:F1",
+        "辭職全職創業，燒光 runway，最終靠自由接案維生"
+       ]
+      ]
+     },
+     "lesson": "跑道是可以算出來的數字，不是一種感覺"
+    }
+   ]
+  },
+  {
+   "id": "r-cofounder",
+   "phase": 4,
+   "title": "共同創辦人持股 50%",
+   "scene": "他這個月出現兩次，都是在群組裡貼 emoji。\n程式、客服、行銷都是你在做。",
+   "options": [
+    {
+     "text": "算了，他人很好，之後會好轉",
+     "tier": "bad",
+     "d": {
+      "cash": -250,
+      "churn": 3
+     },
+     "ref": {
+      "ch": "團隊衝突",
+      "pat": "模式1",
+      "n": 10,
+      "name": "共同創辦人持股卻不投入，主力創辦人被迫獨自扛下全部執行",
+      "cases": [
+       [
+        "1ksfkz4:F3",
+        "技術方無償投入約 2,000 小時於對方的點子，夥伴隱瞞並將精力轉投另一個點子，連續數月以家庭事件為由消失"
+       ],
+       [
+        "1klopqw:F3",
+        "共同創辦人完全不投入工作，留言者獨自營運三年"
+       ]
+      ]
+     },
+     "lesson": "以為『他們很優秀就會努力工作』，事後認為是錯判"
+    },
+    {
+     "text": "自己全扛，等產品成功再談",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "執行資源不足",
+      "pat": "模式3",
+      "n": 26,
+      "name": "獨自扛下開發、行銷、客服、維運全部角色，身心過勞或健康危機迫使停止",
+      "cases": [
+       [
+        "1hzde4a:F1",
+        "Adspott 獨自開發近兩年後推出，因耗盡精力導致倦怠並忽略業務其他面向"
+       ],
+       [
+        "1kn7cz4:F1",
+        "21 歲獨立開發者因健康惡化且財務困窘"
+       ]
+      ]
+     },
+     "lesson": "越成功，股權問題越貴"
+    },
+    {
+     "text": "現在就攤開來談股權與退出條款",
+     "tier": "good",
+     "d": {
+      "cash": -300,
+      "mrr": 340,
+      "churn": -2
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "團隊衝突",
+      "pat": "模式1",
+      "n": 10,
+      "name": "共同創辦人持股卻不投入，主力創辦人被迫獨自扛下全部執行",
+      "cases": [
+       [
+        "1ksfkz4:F3",
+        "技術方無償投入約 2,000 小時，夥伴隱瞞並轉投另一個點子"
+       ],
+       [
+        "1klopqw:F3",
+        "共同創辦人完全不投入，留言者獨自營運三年"
+       ]
+      ]
+     },
+     "lesson": "「本以為自己擅長組隊，但實際上從未有好的共同創辦人」"
+    },
+    {
+     "text": "確認帳號、程式碼、資料庫的控制權不在單一個人手上",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "mrr": 260
+     },
+     "src": {
+      "kind": "selfcheck",
+      "ch": "團隊衝突",
+      "pat": "模式3",
+      "n": 4,
+      "name": "夥伴或員工掌握帳號、程式碼或資料庫唯一控制權，衝突時遭鎖外、奪權或惡意刪除",
+      "cases": [
+       [
+        "1nkik4f:F1",
+        "專案進行約兩年並已上線，獲得 40k 曝光與 30+ 用戶，解雇合作兩年的 CTO 好友後發生程式碼與伺服器被刪"
+       ],
+       [
+        "1tsp5lu:F1",
+        "兩個月內達 800-900 名用戶、$60 MRR，與技術共同創辦人爭執投入程度，對方掌握程式碼與資料庫存取權，"
+       ]
+      ]
+     },
+     "lesson": "關係破裂的時候，誰握著 root 誰說了算"
+    }
+   ]
+  },
+  {
+   "id": "r-big-client",
+   "phase": 4,
+   "title": "一個客戶佔你營收 70%",
+   "scene": "他每天寄功能需求給你。\n另外 140 個用戶，你三週沒回信了。",
+   "tracks": [
+    "b2b",
+    "agency"
+   ],
+   "options": [
+    {
+     "text": "照做，他最大",
+     "tier": "bad",
+     "d": {
+      "cash": -300,
+      "users": -40,
+      "churn": 6
+     },
+     "ref": {
+      "ch": "留存／頻率",
+      "pat": "模式7",
+      "n": 3,
+      "name": "單一大客戶（或大幅折扣客戶）綁架產品路線圖，其餘用戶被忽略而流失",
+      "cases": [
+       [
+        "1qt3x4n:F1",
+        "大客戶每天寄送功能需求郵件，其他 140 位用戶被忽略，單月流失率 18%"
+       ],
+       [
+        "1pd04mg:F1",
+        "大型企業客戶 14 個月後因新任 VP 要求標準化工具而流失，累計淨損約 $41,200"
+       ]
+      ]
+     },
+     "lesson": "單一大型折扣客戶會扭曲整個產品路線圖，即使 logo 看起來耀眼也要更常說不"
+    },
+    {
+     "text": "接受他要求的大幅折扣與客製，換長約",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "mrr": -180,
+      "fixed": 250
+     },
+     "ref": {
+      "ch": "定價／成本",
+      "pat": "模式8",
+      "n": 5,
+      "name": "企業客戶要求大幅折扣、客製化與延遲付款，服務成本吃掉合約收入",
+      "cases": [
+       [
+        "1pd04mg:F1",
+        "給予大型企業客戶 70% 折扣、承接大量客製整合，14 個月淨損約 $41,200"
+       ],
+       [
+        "1pd04mg:F2",
+        "該客戶月費 $12,000 遠低於期望的 $20,000，數年累計成本達 20–30 萬美元"
+       ]
+      ]
+     },
+     "lesson": "折扣不會帶來忠誠度；預算、領導層與優先順序都會改變"
+    },
+    {
+     "text": "回去服務那 140 個人",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "users": 25,
+      "mrr": 400,
+      "churn": -6
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式3",
+      "n": 11,
+      "up": 4,
+      "name": "砍功能、拒絕功能堆疊，讓產品只做用戶真的在用的事",
+      "caution": "Flaris 作者的反例說明問題不只是功能太多，也可能是打磨錯了功能",
+      "cases": [
+       [
+        "1lbyjkt:C3",
+        "砍 60% 入職步驟＋90 天親自回覆流失用戶，MRR 從 $4k 衝到 $28k"
+       ],
+       [
+        "1sl3mrh:C1",
+        "Dubinko：花數週做的功能沒人用，一下午做的功能才有人付費"
+       ]
+      ]
+     },
+     "lesson": "不該讓單一大聲的用戶主導產品路線圖"
+    },
+    {
+     "text": "開始把收入分散到其他客戶",
+     "tier": "good",
+     "d": {
+      "cash": -250,
+      "users": 15,
+      "mrr": 460,
+      "churn": -4
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "外部依賴",
+      "pat": "模式8",
+      "n": 4,
+      "name": "營收集中於單一大客戶或單一行銷通路，對方一撤手收入即歸零",
+      "cases": [
+       [
+        "1rtgul4:F6",
+        "與同一客戶合作 15 年、該客戶占營收約 75%，客戶一夜之間被 VC 收購重組後合作終止"
+       ],
+       [
+        "1l3hwpe:F18",
+        "七位數營收 SaaS 的最大客戶占營收 70%，客戶被收購後依合約 30 天終止條款解約"
+       ]
+      ]
+     },
+     "lesson": "「把全部收入建立在他人決定上是單一故障點」"
+    }
+   ]
+  },
+  {
+   "id": "r-google",
+   "phase": 4,
+   "title": "演算法更新",
+   "scene": "Google 昨天更新。你的頁面被大量去索引。\n這個月的自然流量剩下 12%。",
+   "options": [
+    {
+     "text": "生更多頁面補回來",
+     "tier": "bad",
+     "d": {
+      "cash": -700,
+      "fixed": 150,
+      "users": 40
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式2",
+      "n": 10,
+      "name": "Google 搜尋演算法或政策一次調整，SEO 流量與收入斷崖式下滑",
+      "cases": [
+       [
+        "1vpfj8i:F3",
+        "一次不可逆的 taxonomy 變更後，Google 將約 80 萬個頁面去索引，6 個自動化網站的月收入崩盤"
+       ],
+       [
+        "1ig9cjl:F2",
+        "Google 將自然觸及砍 90%，因從未投廣告而流量與銷售雙雙蒸發"
+       ]
+      ]
+     },
+     "lesson": "程式化 SEO 是經典的獨立開發者錯誤，AI Overviews 會直接吞掉這類頁面的流量"
+    },
+    {
+     "text": "等，演算法通常會回來",
+     "tier": "bad",
+     "d": {
+      "cash": -250,
+      "users": -60,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式2",
+      "n": 10,
+      "name": "Google 搜尋演算法或政策一次調整，SEO 流量與收入斷崖式下滑",
+      "cases": [
+       [
+        "1ig9cjl:F2",
+        "App Store 多年類別營收前 20 名的團隊，Google 將自然觸及砍 90%"
+       ],
+       [
+        "1vpfj8i:F3",
+        "一次不可逆的 taxonomy 變更後，Google 將約 80 萬個頁面去索引，6 個自動化網站的月收入從 1"
+       ]
+      ]
+     },
+     "lesson": "你不擁有的渠道，恢復時間表也不由你決定"
+    },
+    {
+     "text": "把現有用戶導進 email 名單與社群，建自有渠道",
+     "tier": "good",
+     "d": {
+      "cash": -200,
+      "users": 30,
+      "mrr": 400,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式1",
+      "n": 14,
+      "up": 3,
+      "name": "在目標用戶聚集的小型社群，先留下有幫助的公開評論，再私訊（不貼連結、不推銷）",
+      "caution": "效果高度依賴選對 subreddit——選錯地方，同樣的評論量可以是 0 轉換",
+      "cases": [
+       [
+        "1rywwfg:C1",
+        "LeadVerse.ai：每天回覆約 20 則有幫助的評論、私訊不推銷，達 profitability"
+       ],
+       [
+        "1to662l:C5",
+        "6 個月只用 DM 提供價值不推銷"
+       ]
+      ]
+     },
+     "lesson": "email 名單是少數你真的擁有的東西"
+    },
+    {
+     "text": "改做免費工具，工具比內容農場耐打",
+     "tier": "good",
+     "d": {
+      "cash": -350,
+      "users": 50,
+      "mrr": 360
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式10",
+      "n": 6,
+      "up": 4,
+      "name": "先做免費小工具/免費儀表板當作漏斗頂端，再導向付費功能",
+      "caution": "反例是「拿掉免費方案反而讓收入提升」——VideoYards 與 GhostBill 系列都提到移除免費層級後才出現第一位付費客戶",
+      "cases": [
+       [
+        "1p2x3gf:C1",
+        "Postiz：自建多個免費 SEO 工具，每月 1.68 萬次瀏覽，做到 $20k MRR"
+       ],
+       [
+        "1qh7dws:C2",
+        "stockalert.pro：免費儀表板做引流，35% 付費用戶先用過免費工具"
+       ]
+      ]
+     },
+     "lesson": "別人會主動連結工具，不會主動連結你的部落格"
+    }
+   ]
+  },
+  {
+   "id": "r-model-ate-it",
+   "phase": 4,
+   "title": "今天的發表會",
+   "scene": "他們加了一個新功能。\n就是你的產品。免費。",
+   "tracks": [
+    "ai",
+    "b2c"
+   ],
+   "options": [
+    {
+     "text": "降價競爭",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "mrr": -260,
+      "churn": 6
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式3",
+      "n": 10,
+      "name": "ChatGPT／Claude／Cursor 等通用 AI 工具免費追上功能，專用付費工具一夜過時",
+      "cases": [
+       [
+        "1ritlj2:F1",
+        "VarNamer：Electron 桌面 App 上線後獲不錯回饋，隨後被 Cursor 取代"
+       ],
+       [
+        "1rrlhlr:F1",
+        "半導體背景的獨立開發者 9 個月內用 AI vibe coding 做 4 款產品、總收入 0 美元，每次上線後"
+       ]
+      ]
+     },
+     "lesson": "跟免費競爭，你的下限是 0"
+    },
+    {
+     "text": "加更多功能拉開差距",
+     "tier": "bad",
+     "d": {
+      "cash": -900,
+      "fixed": 180
+     },
+     "ref": {
+      "ch": "AI 時代的失敗情境",
+      "pat": "模式2",
+      "n": 23,
+      "name": "產品被通用模型或大廠的免費功能直接取代",
+      "cases": [
+       [
+        "1ritlj2:F1",
+        "AI 變數命名桌面工具回饋不錯，Cursor 推出後需求一夜消失"
+       ],
+       [
+        "1uo6yz1:F1",
+        "SaaS 成長到 1,500+ 用戶後，因 OpenAI 推出免費替代品而關閉"
+       ]
+      ]
+     },
+     "lesson": "不該為本應是網頁的東西做桌面應用，更容易被通用工具取代"
+    },
+    {
+     "text": "轉進大廠不會做的小眾",
+     "tier": "good",
+     "d": {
+      "cash": -300,
+      "users": 20,
+      "mrr": 380,
+      "churn": -3
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式8",
+      "n": 6,
+      "up": 3,
+      "name": "深耕小眾利基，避開跟大型玩家的正面競爭",
+      "caution": "這些案例的收入規模普遍偏小，多在數十到數千美元 MRR，資料中沒有出現深耕小眾後規模化到企業級收入的同類",
+      "cases": [
+       [
+        "1ssvm2r:C8",
+        "Bank Statement Converter：專做銀行對帳單轉檔給記帳員／會計師，29 名付費客戶"
+       ],
+       [
+        "1oabnmd:C5",
+        "避開企業級市場專注中小企業，5 年無會議自助式獲利"
+       ]
+      ]
+     },
+     "lesson": "大廠做 80% 的人要的東西，剩下 20% 才是你的地盤"
+    },
+    {
+     "text": "換一群通用模型碰不到的客戶（資料不能外流的那種）",
+     "tier": "good",
+     "d": {
+      "cash": -400,
+      "users": 12,
+      "mrr": 460,
+      "churn": -4
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群從建築 PM 換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ],
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師，流失率 2.1% vs 8.3%"
+       ]
+      ]
+     },
+     "lesson": "通用模型吃不到有合規與資料邊界的客戶"
+    }
+   ]
+  },
+  {
+   "id": "r-free-load",
+   "phase": 4,
+   "title": "1,200 個免費用戶，12 個付費",
+   "scene": "免費用戶的客服佔掉你 80% 的時間。\n你的伺服器帳單每個月都在漲。",
+   "options": [
+    {
+     "text": "繼續養，總有一天會轉",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": 180,
+      "fixed": 120,
+      "churn": 4
+     },
+     "ref": {
+      "ch": "留存／頻率",
+      "pat": "模式2",
+      "n": 10,
+      "name": "免費方案／免費額度被榨乾即消失，幾乎不轉換付費",
+      "cases": [
+       [
+        "1vaqytm:F3",
+        "credits 免費額度機制，用戶做 4–5 次操作就離開，遠早於額度上限"
+       ],
+       [
+        "1n6dwjl:F2",
+        "B2C AI 圖像平台，上線兩天 20 名使用者全部未回訪，只用免費額度"
+       ]
+      ]
+     },
+     "lesson": "「大量隨機註冊用戶若不願付費並無意義」"
+    },
+    {
+     "text": "給免費用戶更多額度，先把口碑做起來",
+     "tier": "bad",
+     "d": {
+      "cash": -250,
+      "users": 260,
+      "fixed": 200,
+      "churn": 5
+     },
+     "ref": {
+      "ch": "啟用／轉換",
+      "pat": "模式6",
+      "n": 11,
+      "name": "免費方案／免費額度設計得太慷慨，使用者已滿足需求後沒有付費誘因",
+      "cases": [
+       [
+        "1rm0c2a:F1",
+        "canvix：850 名用戶中多數用完 10 個免費 Pro 額度後不再回訪"
+       ],
+       [
+        "1hs7hap:F1",
+        "3 個免費額度已足夠多數人用完產品，導致無人付費"
+       ]
+      ]
+     },
+     "lesson": "「純粹的免費使用者本身沒有商業價值」"
+    },
+    {
+     "text": "砍掉免費方案",
+     "tier": "good",
+     "d": {
+      "cash": -100,
+      "users": -900,
+      "mrr": 520,
+      "churn": -6
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式2",
+      "n": 9,
+      "up": 4,
+      "name": "拿掉免費方案、收緊免費層級，或試用要求先綁信用卡",
+      "caution": "FeedbackQueue 作者明確表示實施硬性付費牆會扼殺平台的成長，因此選擇保留免費層級；Cubix Capture 反例顯示 253 名活躍用戶中只有 6 人付費",
+      "cases": [
+       [
+        "1qlglwd:C1",
+        "Videoyards 拿掉免費方案才有第一位付費客戶（exit）"
+       ],
+       [
+        "1ngumpo:C1",
+        "StarterPilot 把無限期免費方案改成 7 天試用（exit）"
+       ]
+      ]
+     },
+     "lesson": "有人砍掉免費方案後 60 天內營收翻倍，支援負載同時下降"
+    },
+    {
+     "text": "只留少數高單價客戶",
+     "tier": "good",
+     "d": {
+      "cash": -150,
+      "users": -1000,
+      "mrr": 560,
+      "churn": -7
+     },
+     "src": {
+      "kind": "success",
+      "ch": "定價",
+      "pat": "模式7",
+      "n": 6,
+      "up": 3,
+      "name": "只服務少數高單價／企業客戶，而非大量低價自助客戶",
+      "caution": "Paid App Review Service 單筆最低收 $250、累積約 70 次評測、營收近 $1 萬，但扣掉付給評測者的 70% 佣金後所剩不多",
+      "cases": [
+       [
+        "1hqxi8b:C2",
+        "Deep tech SaaS 靠約 10 名用戶做到 $20 萬 ARR、後破 $1M ARR"
+       ],
+       [
+        "1o4xz7a:C3",
+        "Self-service SaaS 企業合約貢獻逾 $10 萬 ARR"
+       ]
+      ]
+     },
+     "lesson": "用戶數變成兩位數，時間才回到你手上"
+    }
+   ]
+  },
+  {
+   "id": "x-cease-desist",
+   "phase": 4,
+   "requires": "scraping",
+   "title": "一封來自法務部門的信",
+   "scene": "主旨：Cease and Desist。\n他們知道你的公司名、你的網域、還有你註冊時留的私人信箱。",
+   "warn": "你前面選擇了以抓取對方平台資料作為核心功能。",
+   "options": [
+    {
+     "text": "換 proxy 繼續跑，他們找不到伺服器",
+     "tier": "kill",
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1ritlj2:F3",
+        "獨自開發的 LinkedIn 爬蟲產品，收到兩封 cease-and-desist 律師函後終止"
+       ],
+       [
+        "1ock4x2:F1",
+        "未使用自動化功能的 LinkedIn 工具曾帶來數十萬美元淨收入，法務行動後判斷無力對抗而結束"
+       ]
+      ]
+     },
+     "lesson": "「缺乏法律資源時，在大型平台規則之上構建產品風險極高」"
+    },
+    {
+     "text": "停掉抓取，改用官方 API 拿得到的部分",
+     "tier": "good",
+     "d": {
+      "cash": -600,
+      "users": -200,
+      "mrr": -180,
+      "churn": 2
+     },
+     "src": {
+      "kind": "selfcheck",
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1snd4t4:F1",
+        "Apollo Scraper：曾有 50 名活躍用戶，遭 Apollo 封鎖網站並將網域從 Hostinger 移除"
+       ],
+       [
+        "1k20pzp:F3",
+        "汽車列表抓取專案研究後發現同類業務曾被起訴敗訴倒閉，3 週後主動停止"
+       ]
+      ]
+     },
+     "lesson": "「如果對方明天發一封律師函要求停止，我有沒有合法的備援商業模式？」"
+    },
+    {
+     "text": "找律師評估，同時暫停抓取",
+     "tier": "ok",
+     "d": {
+      "cash": -1200,
+      "users": -120,
+      "mrr": -90
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "外部依賴",
+      "pat": "模式7",
+      "n": 4,
+      "name": "在他人平台上以爬蟲／自動化構建產品，遭平台法務施壓或技術封鎖被迫關閉",
+      "cases": [
+       [
+        "1ock4x2:F1",
+        "LinkedIn 工具曾帶來數十萬美元淨收入，法務行動後判斷無力對抗而結束"
+       ],
+       [
+        "1ritlj2:F3",
+        "收到兩封 cease-and-desist 律師函後終止"
+       ]
+      ]
+     },
+     "lesson": "在他人產品之上構建有風險：對方可能改動 API 或採取法律行動"
+    },
+    {
+     "text": "把產品轉向完全不依賴抓取的那一塊",
+     "tier": "good",
+     "d": {
+      "cash": -900,
+      "users": -260,
+      "mrr": -140,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "產品",
+      "pat": "模式5",
+      "n": 6,
+      "up": 4,
+      "name": "換目標客群（ICP）而不是重做產品",
+      "caution": "來源未提供直接反例，但 SocLeads 的起點（前六個月僅 40 名用戶、收入不夠覆蓋成本）本身說明「先射箭再畫靶」式的定位常",
+      "cases": [
+       [
+        "1sk90yl:C5",
+        "Buildform/Trellica：客群換成 HVAC／水電主管，60 天拿下 11 家付費商戶"
+       ],
+       [
+        "1sd4bmy:C1",
+        "排程工具改鎖定物理治療師，流失率 2.1% vs 8.3%"
+       ]
+      ]
+     },
+     "lesson": "不該把生意建立在沒有權利使用的資料上"
+    }
+   ]
+  },
+  {
+   "id": "x-account-ban",
+   "phase": 4,
+   "requires": "onechannel",
+   "title": "今天早上登不進去",
+   "scene": "沒有通知，沒有理由，申訴表單送出後跳出一個工單號碼。\n你 100% 的用戶都是從那個帳號來的。",
+   "warn": "你前面選擇把全部獲客押在單一社群帳號上。",
+   "options": [
+    {
+     "text": "等申訴，反正用戶都在那邊",
+     "tier": "kill",
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式5",
+      "n": 7,
+      "name": "Reddit／Threads／X 等社群帳號無預警被封，唯一行銷管道一夕消失",
+      "cases": [
+       [
+        "1t0tohi:F1",
+        "靠 Threads 經營受眾、已有數十人表態想付費，Threads 的 AI 系統把重複發文誤判為機器人而禁用帳號"
+       ],
+       [
+        "1hybtdh:F5",
+        "完全沒有正式行銷策略、僅靠 X 成長，帳號無故遭停權後推廣中斷"
+       ]
+      ]
+     },
+     "lesson": "唯一的渠道被關掉時，你沒有第二個動作可以做"
+    },
+    {
+     "text": "開新帳號重來",
+     "tier": "bad",
+     "d": {
+      "cash": -200,
+      "users": -300,
+      "mrr": -240,
+      "churn": 5
+     },
+     "ref": {
+      "ch": "外部依賴",
+      "pat": "模式5",
+      "n": 7,
+      "name": "Reddit／Threads／X 等社群帳號無預警被封，唯一行銷管道一夕消失",
+      "cases": [
+       [
+        "1sywe23:F2",
+        "新註冊 Reddit 帳號發推廣文後立即被封禁，此前 2 萬次影片瀏覽也只換來 9 次落地頁造訪"
+       ],
+       [
+        "1v7qm68:F3",
+        "Reddit 帳號因被判定為垃圾訊息遭封禁，且發文需最低 karma 門檻形成惡性循環"
+       ]
+      ]
+     },
+     "lesson": "新帳號發推廣文，通常被封得更快"
+    },
+    {
+     "text": "立刻把還能聯絡到的用戶導進 email 名單",
+     "tier": "good",
+     "d": {
+      "cash": -250,
+      "users": -180,
+      "mrr": -100,
+      "churn": -2
+     },
+     "src": {
+      "kind": "success",
+      "ch": "獲客",
+      "pat": "模式1",
+      "n": 14,
+      "up": 3,
+      "name": "在目標用戶聚集的小型社群，先留下有幫助的公開評論，再私訊（不貼連結、不推銷）",
+      "caution": "效果高度依賴選對 subreddit——選錯地方，同樣的評論量可以是 0 轉換",
+      "cases": [
+       [
+        "1rywwfg:C1",
+        "LeadVerse.ai：每天回覆約 20 則有幫助的評論、私訊不推銷，達 profitability"
+       ],
+       [
+        "1to662l:C5",
+        "6 個月只用 DM 提供價值不推銷"
+       ]
+      ]
+     },
+     "lesson": "帳號是租來的，名單才是你的"
+    },
+    {
+     "text": "同時開三條新渠道，不再押單一來源",
+     "tier": "good",
+     "d": {
+      "cash": -500,
+      "users": -140,
+      "mrr": -60,
+      "churn": -3
+     },
+     "src": {
+      "kind": "lesson",
+      "ch": "獲客失敗",
+      "pat": "模式8",
+      "n": 80,
+      "name": "初期一波之後成長停滯，或獲客全靠單一來源",
+      "cases": [
+       [
+        "1qy553c:F6",
+        "$7k MRR 時依賴手動在 subreddit 發文，停發即停滯"
+       ],
+       [
+        "1uxzooc:F1",
+        "單靠 Reddit 發文獲客，發文疲勞後渠道枯竭"
+       ]
+      ]
+     },
+     "lesson": "「免費行銷能起步但終會失效」"
+    }
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+'use strict';
+(function () {
+  const $ = id => document.getElementById(id);
+  const BANK = JSON.parse($('bank').textContent);
+  const nf = new Intl.NumberFormat('zh-Hant');
+  const money = n => '$' + nf.format(Math.round(n));
+  const PHASE_MONTHS = {1:[1,2,3], 2:[4,5,6,7], 3:[8,9,10], 4:[11,12]};
+  const TIER_LABEL = {good:'有證據支持', ok:'沒踩雷，但錯過時機', bad:'命中失敗模式', kill:'一次結束'};
+  const KIND_LABEL = {success:'成功模式', selfcheck:'自我檢查問題', lesson:'當事人教訓'};
+
+  function node(tag, value, className) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (value !== undefined && value !== null) el.textContent = value;
+    return el;
+  }
+
+  // 內嵌 SVG（Lucide 幾何），不是 emoji：emoji 跨平台字形不一致、也吃不到 currentColor。
+  // 每個圖示旁邊都有可見文字，所以一律 aria-hidden。
+  const NS = 'http://www.w3.org/2000/svg';
+  const ICON = {
+    check: 'M20 6 9 17l-5-5',
+    x: 'M18 6 6 18M6 6l12 12',
+    minus: 'M5 12h14',
+    alert: 'm10.29 3.86-8.18 14a2 2 0 0 0 1.71 3h16.36a2 2 0 0 0 1.71-3l-8.18-14a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01',
+    dead: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM4.93 4.93l14.14 14.14',
+    link: 'M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6',
+    arrow: 'M5 12h14M13 6l6 6-6 6'
+  };
+  const TIER_ICON = {good: 'check', ok: 'minus', bad: 'x', kill: 'dead'};
+
+  function icon(name, size) {
+    const svg = document.createElementNS(NS, 'svg');
+    for (const [k, v] of [['viewBox', '0 0 24 24'], ['width', size || 16], ['height', size || 16],
+                          ['fill', 'none'], ['stroke', 'currentColor'], ['stroke-width', '1.75'],
+                          ['stroke-linecap', 'round'], ['stroke-linejoin', 'round'],
+                          ['aria-hidden', 'true'], ['focusable', 'false'], ['class', 'ico']])
+      svg.setAttribute(k, v);
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', ICON[name]);
+    svg.appendChild(path);
+    return svg;
+  }
+
+  // 人數長條的基準＝題庫裡最大的那個模式，不寫死數字，換題庫也不會漂。
+  const MAXN = BANK.questions.reduce((m, q) => q.options.reduce(
+    (a, o) => Math.max(a, ((o.src || o.ref) || {}).n || 0), m), 1);
+
+  // --- 經濟模型 -------------------------------------------------------------
+  // 跑道是衍生值，不是可以直接加減的數字。用戶帶著成本尾巴（unit），所以
+  // 「用戶變多」不一定是好事 —— 定價／成本 模式1（41 人）就是這條算式。
+  function settle(s, d) {
+    d = d || {};
+    s.cash  += d.cash  || 0;
+    s.fixed += d.fixed || 0;
+    s.churn  = Math.min(40, Math.max(2, s.churn + (d.churn || 0)));
+    const churned = Math.round(s.users * s.churn / 100);
+    s.users = Math.max(0, s.users - churned + (d.users || 0));
+    s.mrr   = Math.max(0, s.mrr + (d.mrr || 0));
+    const infra = Math.ceil(s.users * s.unit);
+    const burn  = s.fixed + infra;
+    s.cash += s.mrr - burn;
+    return {churned, infra, burn, net: s.mrr - burn};
+  }
+  const runwayOf = (s, burn) => burn > s.mrr ? Math.floor(s.cash / (burn - s.mrr)) : Infinity;
+
+  function shuffle(arr, rnd) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor((rnd || Math.random)() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  const eligible = (phase, track, flags) => BANK.questions.filter(q =>
+    q.phase === phase &&
+    (!q.tracks || q.tracks.indexOf(track) >= 0) &&
+    (!q.requires || flags.has(q.requires)));
+
+  const MONTH_PHASE = {};
+  for (const ph of [1,2,3,4]) for (const m of PHASE_MONTHS[ph]) MONTH_PHASE[m] = ph;
+
+  // 逐月現抽而不是開局排好：旗標是中途才點亮的，現抽才看得到被解鎖的後果題。
+  function pickQuestion(month, track, flags, used) {
+    const pool = eligible(MONTH_PHASE[month], track, flags).filter(q => !used.has(q.id));
+    const unlocked = pool.filter(q => q.requires);
+    return (unlocked.length ? unlocked : shuffle(pool))[0] || null;
+  }
+
+  // --- 狀態 -----------------------------------------------------------------
+  let S = null;
+
+  function newGame(trackKey) {
+    trackKey = trackKey || shuffle(Object.keys(BANK.tracks))[0];
+    const t = BANK.tracks[trackKey];
+    S = {track: trackKey, tname: t.name, unit: t.unit,
+         cash: t.cash, users: t.users, mrr: t.mrr, fixed: t.fixed, churn: t.churn,
+         sub: t.sub, fixedNote: t.fixedNote, month: 0, flags: new Set(), log: [], used: new Set(), dead: null};
+    show('round');
+    nextMonth();
+  }
+
+  function nextMonth(delta) {
+    if (S.dead || S.month >= 12) return ending();
+    S.month++;
+    const q = pickQuestion(S.month, S.track, S.flags, S.used);
+    if (!q) return ending();
+    S.used.add(q.id);
+    renderRail(delta);
+    renderQuestion(q);
+  }
+
+  // --- 畫面 -----------------------------------------------------------------
+  function show(which) {
+    for (const id of ['start','round','ending','selftest']) $(id).hidden = (id !== which);
+  }
+
+  function renderRail(delta) {
+    const infra = Math.ceil(S.users * S.unit);
+    const burn = S.fixed + infra;
+    const rw = runwayOf(S, burn);
+    const rail = $('rail');
+    rail.textContent = '';
+
+    const tk = node('div', null, 'tk');
+    tk.appendChild(node('b', S.tname));
+    tk.appendChild(node('span', S.sub));
+    rail.appendChild(tk);
+
+    const tick = node('div', null, 'ticker');
+    for (let m = 1; m <= 12; m++)
+      tick.appendChild(node('i', null, m < S.month ? 'on' : m === S.month ? 'now' : ''));
+    rail.appendChild(tick);
+    rail.appendChild(node('p', `第 ${S.month} 個月 / 共 12 個月`, 'mo'));
+
+    for (const [k, v] of [['現金', money(S.cash)], ['用戶', nf.format(S.users)],
+                          ['MRR', money(S.mrr)], ['月流失', S.churn + '%']]) {
+      const row = node('div', null, 'stat');
+      row.appendChild(node('span', k));
+      row.appendChild(node('b', v));
+      rail.appendChild(row);
+    }
+
+    // 本月變化：固定佔位，有變化才播動畫，2 秒後用 timeout 收掉——
+    // 不靠 animationend，reduced-motion 把動畫關掉時才不會永遠留在畫面上。
+    const flash = node('div', null, 'flash');
+    if (delta) {
+      flash.classList.add('on');
+      flash.appendChild(node('span', '本月', 'tag2'));
+      for (const [k, v, fmt] of [['現金', delta.cash, money], ['用戶', delta.users, n => nf.format(n)],
+                                 ['MRR', delta.mrr, money]]) {
+        if (!v) continue;
+        flash.appendChild(node('span', `${k} ${v > 0 ? '+' : '−'}${fmt(Math.abs(v))}`,
+          v > 0 ? 'up' : 'down'));
+      }
+      // 流失是人數不是增減，加正負號會讀成「流失變少了」
+      if (delta.churned) flash.appendChild(node('span', `流失 ${nf.format(delta.churned)} 人`, 'down'));
+      setTimeout(() => flash.remove(), 2000);
+    }
+    rail.appendChild(flash);
+
+    const box = node('div', null,
+      'runway' + (rw === Infinity || rw >= 6 ? '' : rw >= 3 ? ' low' : ' crit'));
+    box.appendChild(node('span', '跑道', 'rlabel'));
+    box.appendChild(node('div', rw === Infinity ? '∞' : rw + ' 個月', 'big'));
+    const bar = node('div', null, 'bar');
+    const fill = node('i');
+    fill.style.width = Math.max(2, Math.min(100, rw === Infinity ? 100 : rw / 12 * 100)) + '%';
+    bar.appendChild(fill);
+    box.appendChild(bar);
+    const math = node('p', null, 'math');
+    if (rw === Infinity) {
+      math.appendChild(node('span', `月支出 ${money(burn)} 已經低於 MRR ${money(S.mrr)}，跑道無限`));
+    } else {
+      math.appendChild(node('em', `${money(S.cash)} ÷ (${money(burn)} − ${money(S.mrr)})`));
+      math.appendChild(node('br'));
+      math.appendChild(node('span', `月支出 = 固定 ${money(S.fixed)} + 基礎設施 ${money(infra)}`));
+    }
+    box.appendChild(math);
+    rail.appendChild(box);
+  }
+
+  function renderQuestion(q) {
+    $('warnBox').textContent = '';
+    if (q.warn) {
+      const w = node('p', null, 'warn');
+      w.appendChild(icon('alert'));
+      w.appendChild(node('span', q.warn));
+      $('warnBox').appendChild(w);
+    }
+    $('sceneTitle').textContent = q.title;
+    $('scene').textContent = q.scene;
+    const box = $('opts');
+    box.textContent = '';
+    shuffle(q.options).forEach((opt, i) => {
+      const b = node('button', null, 'opt');
+      b.type = 'button';
+      b.appendChild(node('kbd', String(i + 1)));
+      b.appendChild(node('span', opt.text));
+      b.setAttribute('aria-keyshortcuts', String(i + 1));
+      b.addEventListener('click', () => choose(q, opt));
+      box.appendChild(b);
+    });
+  }
+
+  function choose(q, opt) {
+    for (const b of $('opts').querySelectorAll('button')) b.disabled = true;
+    if (opt.flag) S.flags.add(opt.flag);
+
+    let delta = null;
+    if (opt.tier === 'kill') {
+      S.dead = {month: S.month, why: 'kill', ref: opt.ref};
+      S.mrr = 0; S.users = 0;
+    } else {
+      const acct = settle(S, opt.d);
+      if (S.cash < 0) S.dead = {month: S.month, why: 'runway', ref: opt.ref || null};
+      delta = {cash: acct.net + (opt.d && opt.d.cash || 0),
+               users: (opt.d && opt.d.users || 0) - acct.churned,
+               mrr: opt.d && opt.d.mrr || 0, churned: acct.churned};
+    }
+    S.log.push({month: S.month, qid: q.id, title: q.title, text: opt.text, tier: opt.tier,
+                ref: opt.ref || null, src: opt.src || null, lesson: opt.lesson || null});
+
+    if (S.dead || S.month >= 12) return ending();
+    nextMonth(delta);
+  }
+
+  function refBlock(r, isWin) {
+    const wrap = node('div', null, 'pat');
+    wrap.appendChild(node('p', `${r.ch} · ${r.pat}`, 'chap'));
+    wrap.appendChild(node('p', r.name, 'pname'));
+
+    // 長條就是比例本身：成功模式填「N 人裡有幾人走得更遠」，失敗模式填「相對最大模式的份量」。
+    const sc = node('div', null, 'scale');
+    const frac = isWin && r.up !== undefined ? r.up / r.n : r.n / MAXN;
+    sc.appendChild(node('div', nf.format(r.n), 'n'));
+    const right = node('div');
+    right.appendChild(node('div', isWin
+      ? (r.up === undefined ? `人用過這個做法` :
+         `人用過，其中 ${r.up} 人走得比「有人付過錢」更遠（${Math.round(100 * r.up / r.n)}%）`)
+      : `人踩過（不含低信任來源）。資料中最大的模式是 ${MAXN} 人`, 'meta'));
+    const t2 = node('div', null, 'track2');
+    const f2 = node('i');
+    f2.style.width = Math.max(2, Math.round(frac * 100)) + '%';
+    t2.appendChild(f2);
+    right.appendChild(t2);
+    sc.appendChild(right);
+    wrap.appendChild(sc);
+
+    if (r.caution) {
+      const c = node('div', null, 'caution');
+      c.appendChild(icon('alert'));
+      c.appendChild(node('span', r.caution));
+      wrap.appendChild(c);
+    }
+
+    const ul = node('ul', null, 'cases');
+    for (const [id, gist] of r.cases) {
+      const li = node('li', null, 'case');
+      const a = node('a');
+      a.href = 'https://www.reddit.com/comments/' + id.split(':')[0];
+      a.rel = 'noopener noreferrer';
+      a.target = '_blank';
+      a.appendChild(node('span', id));
+      a.appendChild(icon('link', 12));
+      const cell = node('div');
+      cell.appendChild(a);
+      li.appendChild(cell);
+      li.appendChild(node('span', gist));
+      ul.appendChild(li);
+    }
+    wrap.appendChild(ul);
+    return wrap;
+  }
+
+  // --- 結局 -----------------------------------------------------------------
+  function grade() {
+    if (S.dead) return {t: S.dead.why === 'kill' ? '一次結束' : '倒閉', g: 'X'};
+    if (S.mrr < S.fixed * 0.25) return {t: 'D · 還活著，但沒有訊號', g: 'D'};
+    if (S.mrr < S.fixed)        return {t: 'C · 有付費訊號，還在補貼自己', g: 'C'};
+    if (S.mrr < 5000)           return {t: 'B · 產品養得起自己', g: 'B'};
+    return {t: 'A · 覆蓋生活費', g: 'A'};
+  }
+
+  function ending() {
+    show('ending');
+    const box = $('endBody');
+    box.textContent = '';
+    const g = grade();
+
+    const v = node('div', null, 'verdict ' + (S.dead ? 'dead' : g.g === 'A' || g.g === 'B' ? 'win' : ''));
+    v.appendChild(node('div', g.g, 'g'));
+    const right = node('div');
+    right.appendChild(node('h3', g.t));
+    if (S.dead) {
+      right.appendChild(node('p', S.dead.why === 'kill'
+        ? `第 ${S.dead.month} 個月。不是慢慢燒完的，是一次結束的。`
+        : `第 ${S.dead.month} 個月，現金見底。`));
+    } else {
+      right.appendChild(node('p', '撐過 12 個月。'));
+      const f = node('div', null, 'finals');
+      for (const [k, val] of [['現金', money(S.cash)], ['用戶', nf.format(S.users)],
+                              ['MRR', money(S.mrr)], ['月固定支出', money(S.fixed)]]) {
+        const c = node('div');
+        c.appendChild(node('span', k));
+        c.appendChild(node('b', val));
+        f.appendChild(c);
+      }
+      right.appendChild(f);
+      if (g.g === 'A') right.appendChild(node('p',
+        '$5,000 這條線來自〈執行資源不足 模式2〉裡當事人自己的建議：在 MRR 穩定覆蓋生活費之前不該辭去全職工作。',
+        'origin'));
+    }
+    v.appendChild(right);
+    box.appendChild(v);
+
+    const hits = S.log.filter(l => l.tier === 'bad' || l.tier === 'kill');
+    const wins = S.log.filter(l => l.tier === 'good');
+
+    const tally = node('div', null, 'tally');
+    const t1 = node('div', null, 'hit');
+    t1.appendChild(node('b', String(hits.length)));
+    t1.appendChild(node('span', '命中的失敗模式'));
+    const t2 = node('div', null, 'win');
+    t2.appendChild(node('b', String(wins.length)));
+    t2.appendChild(node('span', '有證據支持的決定'));
+    tally.appendChild(t1);
+    tally.appendChild(t2);
+    box.appendChild(tally);
+
+    const ex = explainBlock();
+    if (ex) box.appendChild(ex);
+
+    if (wins.length) {
+      const sum = node('div', null, 'slab');
+      sum.appendChild(node('span', '你做對的事', 'label'));
+      const ul = node('ul', null, 'wins');
+      ul.style.marginTop = 'var(--sp-3)';
+      for (const w of wins) {
+        const li = node('li');
+        li.appendChild(node('span', w.text));
+        if (w.src) {
+          const sc = w.src;
+          li.appendChild(node('span', `${KIND_LABEL[sc.kind]}〈${sc.ch} ${sc.pat}〉${sc.name}` +
+            (sc.kind === 'success' && sc.up !== undefined
+              ? `　${sc.n} 人用過，${sc.up} 人走得更遠（${Math.round(100 * sc.up / sc.n)}%）` : ''), 'how'));
+        }
+        ul.appendChild(li);
+      }
+      sum.appendChild(ul);
+      box.appendChild(sum);
+    }
+
+    const warn = node('div', null, 'slab');
+    warn.appendChild(node('span', '百分比讀之前', 'label'));
+    const wl = node('ul');
+    for (const t of [
+      '分母全部很小（5–17 人）。任何一格波動一個人，百分比就差 10–20 個百分點。',
+      '跨章節比較無效：同一件事「解決自己的問題」在〈驗證 模式1〉是 30 人 / 1 人升級（3%），在〈產品 模式1〉是 12 人 / 5 人升級（42%）。',
+      '因果方向分不出來：敢漲價的人，可能本來就已經有穩定付費客戶。',
+      '倖存者偏差在分子和分母都在。走到出售的人比較有動機發文，停在 $50 MRR 的人不會。'
+    ]) wl.appendChild(node('li', t));
+    warn.appendChild(wl);
+    box.appendChild(warn);
+
+    const logCard = node('div', null, 'slab');
+    logCard.appendChild(node('span', '這 12 個月', 'label'));
+    const ol = node('ul', null, 'log');
+    ol.style.marginTop = 'var(--sp-3)';
+    for (const l of S.log) {
+      const li = node('li');
+      li.appendChild(node('div', String(l.month).padStart(2, '0') + ' 月', 'mo2'));
+      const mark = node('div', null, l.tier === 'good' ? 'good' : l.tier === 'ok' ? 'ok' : 'bad');
+      mark.appendChild(icon(TIER_ICON[l.tier], 16));
+      li.appendChild(mark);
+      const cell = node('div');
+      cell.appendChild(node('span', l.title, 'qt'));
+      cell.appendChild(node('span', l.text));
+      const r = l.src || l.ref;
+      if (r) {
+        const pt = node('span', null, 'pt');
+        pt.appendChild(node('span', `${r.ch} ${r.pat}　`));
+        const a = node('a', r.cases[0][0]);
+        a.href = 'https://www.reddit.com/comments/' + r.cases[0][0].split(':')[0];
+        a.rel = 'noopener noreferrer';
+        a.target = '_blank';
+        pt.appendChild(a);
+        cell.appendChild(pt);
+      }
+      li.appendChild(cell);
+      ol.appendChild(li);
+    }
+    logCard.appendChild(ol);
+    box.appendChild(logCard);
+
+    box.appendChild(shareBlock());
+
+    const again = node('button', null, 'next');
+    again.type = 'button';
+    again.appendChild(node('span', '再玩一次'));
+    again.appendChild(icon('arrow'));
+    again.addEventListener('click', () => { S = null; show('start'); $('startBtn').focus(); });
+    box.appendChild(again);
+  }
+
+  function explainBlock() {
+    const wrongs = S.log.filter(l => (l.tier === 'bad' || l.tier === 'kill') && l.ref);
+    if (!wrongs.length) return null;
+    const wrap = node('div', null, 'slab');
+    wrap.appendChild(node('span', '你選錯的題', 'label'));
+    const list = node('div');
+    list.style.marginTop = 'var(--sp-3)';
+    for (const l of wrongs) {
+      const item = node('div', null, 'fb ' + l.tier);
+      const h = node('h3', null, 'fb-head');
+      h.appendChild(icon(TIER_ICON[l.tier], 20));
+      h.appendChild(node('span', `第 ${l.month} 個月 · ${l.title}`));
+      item.appendChild(h);
+      const b = node('div', null, 'fb-body');
+      b.appendChild(node('p', '你選了：' + l.text, 'lesson'));
+      b.appendChild(refBlock(l.ref, false));
+      if (l.lesson) b.appendChild(node('p', l.lesson, 'lesson'));
+      item.appendChild(b);
+      item.style.marginBottom = 'var(--sp-3)';
+      list.appendChild(item);
+    }
+    wrap.appendChild(list);
+    return wrap;
+  }
+
+  // 給 Threads 用的成績單。網址取 location，部署到哪就是哪，不寫死。
+  function shareText() {
+    const hits = S.log.filter(l => l.tier === 'bad' || l.tier === 'kill');
+    const worst = hits.map(l => l.ref).filter(Boolean).sort((a, b) => b.n - a.n)[0];
+    const head = S.dead
+      ? `我在第 ${S.dead.month} 個月倒閉。`
+      : `我撐過 12 個月，最後 MRR ${money(S.mrr)}。`;
+    const mid = worst
+      ? `踩到最大的坑是〈${worst.ch} ${worst.pat}〉${worst.name}——${worst.n} 人踩過。`
+      : `12 個月沒踩到任何一個有紀錄的失敗模式。`;
+    const url = location.origin + location.pathname;
+    return `${head}\n${mid}\n\n你撐得到第幾個月？\n${url}`;
+  }
+
+  function shareBlock() {
+    const wrap = node('div', null, 'slab share');
+    wrap.appendChild(node('span', '把成績貼出去', 'label'));
+    const ta = node('textarea');
+    ta.readOnly = true;
+    ta.rows = 5;
+    ta.value = shareText();
+    ta.setAttribute('aria-label', '可複製的成績文字');
+    wrap.appendChild(ta);
+
+    const row = node('div', null, 'row');
+    const copy = node('button', null, 'next');
+    copy.type = 'button';
+    copy.appendChild(node('span', '複製'));
+    const said = node('span', '', 'said');
+    said.setAttribute('role', 'status');
+    said.setAttribute('aria-live', 'polite');
+    copy.addEventListener('click', async () => {
+      // file:// 不是 secure context，navigator.clipboard 會丟例外，所以留 execCommand 後路。
+      let ok = false;
+      try { await navigator.clipboard.writeText(ta.value); ok = true; } catch (e) { /* 往下走 */ }
+      if (!ok) { ta.select(); try { ok = document.execCommand('copy'); } catch (e) { ok = false; } }
+      said.textContent = ok ? '已複製' : '複製失敗，請直接選取上面的文字';
+    });
+    row.appendChild(copy);
+
+    const th = node('a', null, 'ghost');
+    th.href = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(shareText());
+    th.rel = 'noopener noreferrer';
+    th.target = '_blank';
+    th.appendChild(node('span', '到 Threads 發文'));
+    th.appendChild(icon('link', 16));
+    row.appendChild(th);
+    row.appendChild(said);
+    wrap.appendChild(row);
+    return wrap;
+  }
+
+  // --- 開場 -----------------------------------------------------------------
+  function renderStart() {
+    const b = $('startBtn');
+    b.textContent = '';
+    b.appendChild(node('span', '開始 12 個月'));
+    b.appendChild(icon('arrow'));
+    b.addEventListener('click', () => newGame());
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!$('round').hidden) {
+      const opts = $('opts').querySelectorAll('button:not([disabled])');
+      if (opts.length && e.key >= '1' && e.key <= '4') {
+        const b = opts[+e.key - 1];
+        if (b) { b.click(); e.preventDefault(); }
+      }
+    }
+  });
+
+  // --- 自我檢查（平衡模擬，重用真正的 settle()）-----------------------------
+  function selftest() {
+    const out = [];
+    let failed = 0;
+    const ok = (cond, msg) => { out.push((cond ? '  OK  ' : 'FAIL  ') + msg); if (!cond) failed++; };
+
+    // 題庫結構
+    const ids = new Set();
+    for (const q of BANK.questions) {
+      ok(!ids.has(q.id), `題目 id 不重複：${q.id}`); ids.add(q.id);
+      ok(q.options.length === 4, `${q.id} 恰好 4 個選項（實際 ${q.options.length}）`);
+      const tiers = q.options.map(o => o.tier);
+      ok(tiers.indexOf('good') >= 0, `${q.id} 至少一個 good`);
+      ok(tiers.filter(t => t === 'bad' || t === 'kill').length >= 1, `${q.id} 至少一個 bad/kill`);
+      ok(tiers.filter(t => t === 'kill').length <= 1, `${q.id} 最多一個 kill`);
+      if (tiers.indexOf('kill') >= 0) ok(!!q.warn && !!q.requires, `${q.id} kill 題必須有 warn 與 requires`);
+      for (const o of q.options) {
+        if (o.tier === 'bad' || o.tier === 'kill') ok(!!o.ref, `${q.id} / ${o.tier} 必須有 ref`);
+        if (o.tier === 'good') ok(!!o.src, `${q.id} / good 必須有 src`);
+        const r = o.src || o.ref;
+        if (r) ok(r.cases && r.cases.length >= 1, `${q.id} 每個引用至少一個案例`);
+      }
+    }
+
+    // draws 與 PHASE_MONTHS 必須一致，否則抽題數與月份對不上
+    for (const ph of [1,2,3,4])
+      ok(BANK.draws[ph] === PHASE_MONTHS[ph].length,
+         `階段${ph} draws=${BANK.draws[ph]} 對上 ${PHASE_MONTHS[ph].length} 個月份`);
+
+    // 旗標必須成對，否則後果題永遠不會出現
+    const setFlags = new Set(), needFlags = new Set();
+    for (const q of BANK.questions) {
+      if (q.requires) needFlags.add(q.requires);
+      for (const o of q.options) if (o.flag) setFlags.add(o.flag);
+    }
+    for (const f of needFlags) ok(setFlags.has(f), `旗標 ${f} 有題目點亮它`);
+    for (const f of setFlags) ok(needFlags.has(f), `旗標 ${f} 有後果題用到它`);
+
+    // 每個 (賽道, 階段) 的可抽題數
+    for (const tk of Object.keys(BANK.tracks))
+      for (const ph of [1,2,3,4]) {
+        const n = BANK.questions.filter(q => q.phase === ph && !q.requires &&
+          (!q.tracks || q.tracks.indexOf(tk) >= 0)).length;
+        ok(n >= BANK.draws[ph] + 2, `${tk} 階段${ph} 可抽 ${n} 題（需 ≥ ${BANK.draws[ph] + 2}）`);
+      }
+
+    // 平衡：每賽道跑 200 次全好／全壞／全普通
+    // 用真正的 pickQuestion 與 settle，所以旗標解鎖的後果題也會被跑到。
+    const play = (tk, pick) => {
+      const t = BANK.tracks[tk];
+      const s = {unit: t.unit, cash: t.cash, users: t.users, mrr: t.mrr, fixed: t.fixed, churn: t.churn};
+      const flags = new Set(), used = new Set(), seen = [];
+      for (let m = 1; m <= 12; m++) {
+        const q = pickQuestion(m, tk, flags, used);
+        if (!q) break;
+        used.add(q.id);
+        seen.push(q.id);
+        const opt = pick(q);
+        if (!opt) continue;
+        if (opt.flag) flags.add(opt.flag);
+        if (opt.tier === 'kill') return {death: m, kill: true, s, seen};
+        settle(s, opt.d);
+        if (s.cash < 0) return {death: m, s, seen};
+      }
+      return {death: 0, s, seen};
+    };
+    const firstOf = tier => q => q.options.filter(o => o.tier === tier)[0] || q.options[0];
+    const anyOf = q => q.options[Math.floor(Math.random() * q.options.length)];
+
+    for (const tk of Object.keys(BANK.tracks)) {
+      let bad = [], good = 0, alive = 0;
+      for (let i = 0; i < 200; i++) {
+        const b = play(tk, firstOf('bad'));
+        if (b.death) bad.push(b.death);
+        const g = play(tk, firstOf('good'));
+        if (!g.death && g.s.mrr >= g.s.fixed) good++;
+        if (!play(tk, anyOf).death) alive++;
+      }
+      const med = bad.length ? bad.slice().sort((x, y) => x - y)[Math.floor(bad.length / 2)] : 0;
+      ok(bad.length >= 180, `${tk} 全壞路線 200 局中倒閉 ${bad.length} 局（需 ≥180）`);
+      ok(med >= 5 && med <= 10, `${tk} 全壞路線倒閉中位數第 ${med} 個月（需 5–10）`);
+      ok(good >= 190, `${tk} 全好路線 200 局中撐過 12 個月且 MRR ≥ 固定支出 ${good} 局（需 ≥190）`);
+      // 亂選要有輸有贏 —— 結局必須由選擇決定，不是由起始數值決定。
+      ok(alive >= 30 && alive <= 170, `${tk} 亂選 200 局存活 ${alive} 局（需 30–170）`);
+    }
+
+    out.unshift(`題庫 ${BANK.questions.length} 題 · 失敗 ${failed} 項\n`);
+    $('stOut').textContent = out.join('\n');
+    show('selftest');
+  }
+
+  renderStart();
+  if (location.hash === '#selftest') selftest();
+  else show('start');
+})();
+</script>
+</body>
+</html>
