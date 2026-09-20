@@ -148,6 +148,24 @@ def check(bank, fail_idx, win_idx, upgrade, say):
     return failed
 
 
+def coverage(bank, fail_idx, win_idx, say):
+    """兩本手冊的每個模式都要有題目引用到。手冊長出新模式時這裡會紅——
+    那正是「該補題了」的訊號，不是誤報。逐筆查核之外的獨立檢查。"""
+    cited = {(r['ch'], r['pat']) for q in bank['questions'] for o in q['options']
+             for r in [o.get('src') or o.get('ref')] if r}
+    missing = 0
+    for label, idx in (('playbook.md', fail_idx), ('success-playbook.md', win_idx)):
+        for (ch, pat), (title, _) in sorted(idx.items()):
+            # 成功手冊的章節叫「產品與轉向」，題庫與 upgrade-rate.json 都叫「產品」
+            if any(p == pat and ch.startswith(c) for c, p in cited):
+                continue
+            missing += 1
+            say(f'FAIL  {label}〈{ch} {pat}〉{title[:26]} 沒有任何題目引用到')
+    total = len(fail_idx) + len(win_idx)
+    say(f'模式涵蓋 {total - missing}/{total} 個')
+    return missing
+
+
 def demo():
     """自我檢查：乾淨的通過，每一種造假都要被抓到。"""
     book = ('## 需求／價值不足 demand_value\n\n'
@@ -195,11 +213,11 @@ def main():
         return 0
     demo()
     bank = load_bank(pathlib.Path(a.game))
-    failed = check(bank,
-                   index_book(FAIL_BOOK.read_text(encoding='utf-8')),
-                   index_book(WIN_BOOK.read_text(encoding='utf-8')),
-                   json.load(open(UPGRADE, encoding='utf-8')),
-                   print)
+    fail_idx = index_book(FAIL_BOOK.read_text(encoding='utf-8'))
+    win_idx = index_book(WIN_BOOK.read_text(encoding='utf-8'))
+    failed = check(bank, fail_idx, win_idx,
+                   json.load(open(UPGRADE, encoding='utf-8')), print)
+    failed += coverage(bank, fail_idx, win_idx, print)
     return int(failed > 0)
 
 
