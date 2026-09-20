@@ -1,0 +1,37 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 每一筆引用都要逐字對得上 data/ 裡的手冊：模式名、人數、案例 ID
+      # 必須出自它被歸屬的那個模式，「」裡的教訓必須是原文。
+      - name: 引用查核
+        run: python3 verify_game.py
+
+      # 跑題庫結構與經濟平衡的模擬，重用頁面裡真正的 settle()
+      - name: 平衡與題庫自我檢查
+        run: node selftest.js
+
+      # 房規：單檔離線可開
+      - name: 離線約束
+        run: |
+          test "$(grep -c innerHTML index.html)" = 0
+          test "$(grep -cE '<script src|<link ' index.html)" = 0
+          ! grep -oE 'https?://[^"'"'"' <)]+' index.html \
+            | grep -vE 'reddit\.com/comments/|w3\.org/2000/svg|founder-game-coral\.vercel\.app|threads\.net/intent'

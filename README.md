@@ -1,86 +1,93 @@
 # 12 個月
 
-A single-file, offline-capable text adventure about running a startup. Twelve rounds,
-one choice per month. Every option's verdict is backed by a real failure or success
-pattern distilled from 4,999 Reddit posts, and every cited case links back to its
-original thread.
+單一 HTML 檔的創業模擬選擇題。12 個回合等於 12 個月，每個月做一個決定，錢燒完公司就倒閉。
+每個選項的對錯都來自真實的失敗或成功模式——從 4,999 篇 Reddit 貼文蒸餾出來，
+每一個引用的案例都能點回原始討論串。
 
-**Play it: https://founder-game-coral.vercel.app**
+**直接玩：https://founder-game-coral.vercel.app**
 
-## What's in here
+## 檔案
 
-| Path | What it is |
+| 路徑 | 內容 |
 |---|---|
-| `index.html` | The whole game. No build step, no dependencies, no CDN. Double-click to play offline. |
-| `og.png` | Social preview image (1200×630). |
-| `verify_game.py` | Checks every citation in the game against the source playbooks. |
-| `data/playbook.md` | 93 failure patterns across 11 chapters. |
-| `data/success-playbook.md` | 35 success patterns across 4 chapters. |
-| `data/upgrade-rate.json` | Per-pattern "how many went past paid_validation" rates. |
+| `index.html` | 遊戲本體。無 build step、無依賴、無 CDN，雙擊就能離線玩。 |
+| `og.png` | 社群預覽圖（1200×630）。 |
+| `verify_game.py` | 把遊戲裡每一筆引用拿去和手冊逐字比對。 |
+| `selftest.js` | 在 Node 跑頁面自己的 `#selftest`，檢查題庫結構與經濟平衡。 |
+| `data/playbook.md` | 93 個失敗模式，分 11 個章節。 |
+| `data/success-playbook.md` | 35 個成功模式，分 4 個章節。 |
+| `data/upgrade-rate.json` | 每個成功模式「有多少人走得比『有人付過錢』更遠」。 |
 
-## How the data works
+## 資料怎麼來的
 
-The playbooks were distilled from 4,999 Reddit posts (2025-01 to 2026-09) in
-startup and SaaS communities, yielding 3,614 usable failure events from 2,909
-distinct people. Only self-reported, software-business, review-passing events were
-kept. Each pattern needs at least three non-low-trust people behind it and carries
-case IDs so any claim can be traced to its source thread.
+手冊蒸餾自 4,999 篇 Reddit 創業與 SaaS 社群貼文（2025-01 至 2026-09），
+得到 3,614 個可用的失敗事件，來自 2,909 位不同的當事人。
+只收錄同時符合三個條件的事件：審核通過、當事人自述、軟體業務。
+每個模式至少要有三位非低信任來源的當事人支持，並附上案例 ID，
+所以任何一句話都能回查它的出處。
 
-**Read the counts as relative weight, not probability.** "85 people did this" does
-not mean 85% of founders fail this way. The sample is not random, the reports are
-unverified and told in hindsight, and a person's stated cause is not necessarily the
-real one. The success playbook needs even more care: its denominators are 5–17
-people, upgrade rates cannot be compared across chapters, and survivorship bias sits
-in both the numerator and the denominator. The game surfaces these caveats in the
-ending screen rather than burying them here.
+**人數只能比相對多寡，不是機率。** 「85 個人這樣做」不代表 85% 的創業者會這樣失敗。
+這批文章不是隨機樣本，全部是未經查證、事後回顧的自述，
+而且當事人說的原因不等於真正的原因。
 
-Low-trust sources — posts whose own text reads as AI-generated or promotional, where
-the storyteller is the post author — are excluded from every count and never used as
-a representative case.
+成功手冊要更小心讀：它的分母只有 5–17 人，升級率不能跨章節比較，
+倖存者偏差同時存在於分子和分母。這些警語寫在遊戲的結算畫面裡，
+而不是埋在這份 README。
 
-## Verifying the citations
+低信任來源——貼文本身的文字看起來像 AI 生成或宣傳文，而且講述者就是貼文作者——
+已經從所有計數中排除，也絕不拿來當代表案例。
 
-The question bank is hand-authored, so a wrong headcount, a case ID pasted from a
-neighbouring pattern, or an invented founder quote would be invisible to a reader.
-`verify_game.py` catches all of it:
+## 驗證引用
+
+題庫是手寫的，所以抄錯人數、把隔壁模式的案例 ID 貼過來、或是捏造一句當事人的話，
+讀的人完全看不出來。`verify_game.py` 就是來擋這個的：
 
 ```bash
 python3 verify_game.py
 ```
 
-It extracts the embedded JSON bank from `index.html` and asserts that every pattern
-name, chapter, headcount and case ID matches the playbooks verbatim, that each cited
-case actually lives inside the pattern it is attributed to, and that anything printed
-inside 「」 is a real quote from that pattern's block. It exits non-zero on any
-mismatch and ships with an assert-based `demo()` self-check (`--demo`).
+它從 `index.html` 抽出內嵌的 JSON 題庫，然後逐項斷言：
+模式名稱、章節、人數必須和手冊逐字相符；
+每個引用的案例必須真的存在於「它被歸屬的那個模式」的區塊裡；
+寫在「」裡面的教訓必須是該模式原文出現過的句子。
+任一條不符就 exit 非零。腳本本身附 assert 自我檢查（`--demo`）。
 
-The economy is checked separately, inside the page itself, so the simulation reuses
-the real `settle()` instead of a drifting reimplementation:
+第一次跑的時候抓到 180 幾個錯誤，大多是案例 ID 被借到隔壁模式、
+以及把改寫過的句子加了引號。
 
+## 驗證平衡
+
+經濟模型是一個有夾限與順序相依的迴圈，需要自己的檢查。
+用 Python 重寫一份 `settle()` 只會漂掉，所以模擬跑在頁面自己的程式碼上：
+
+```bash
+node selftest.js          # CI 用
+open index.html#selftest  # 瀏覽器裡看
 ```
-open index.html#selftest
-```
 
-That run asserts the question bank's structure, that every (track, phase) pair has
-enough drawable questions, that flag-gated consequence questions are reachable, and
-that an all-bad run dies between month 5 and 10 while an all-good run survives.
+斷言的內容：每題恰好 4 個選項且至少一好一壞；
+每個（賽道 × 階段）的可抽題數足夠；旗標解鎖的後果題真的到得了；
+全選最差的路線要在第 5–10 個月倒閉，全選最好的路線要撐過 12 個月且 MRR 蓋過固定支出；
+亂選的存活率介於 30–170/200，確保結局由選擇決定而不是由起始數值決定。
 
-`data/` is a snapshot of the playbooks at the time the question bank was written. If
-the playbooks are regenerated, refresh the snapshot and re-run the verifier.
+## 部署
 
-## Deploying
-
-Static hosting, nothing to build:
+靜態檔案，沒有 build step。推到 `main` 會自動部署到 Vercel，
+GitHub Actions 會先跑完上面兩個檢查。手動部署：
 
 ```bash
 npx vercel@latest deploy --prod --yes
 ```
 
-If the deployment URL changes, update the absolute `og:image` and `twitter:image`
-URLs in `index.html` — social crawlers do not resolve relative paths.
+網址若變更，記得把 `index.html` 裡 `og:image` 與 `twitter:image` 的絕對網址一起改——
+社群平台的爬蟲不會解析相對路徑。
 
-## License
+## 注意
 
-Code is MIT. The playbook text summarises publicly posted Reddit content and links
-back to each source thread; treat it as research notes, not as a dataset to
-redistribute.
+`data/` 是手冊在題庫寫成當下的快照，不是本體。
+手冊重新生成之後，要更新這份快照再跑一次 `verify_game.py`。
+
+## 授權
+
+程式碼採 MIT。手冊的文字是對公開 Reddit 內容的摘要，並附回每一則原始討論串的連結，
+請當成研究筆記，不是可以再散布的資料集。
