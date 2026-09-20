@@ -84,7 +84,7 @@ h2.sec{font:800 var(--t-l)/1.2 var(--sans);letter-spacing:-.01em;margin:0 0 var(
   background:transparent;color:var(--ink);border:2px solid var(--rule);padding:12px var(--sp-4);
   font-weight:800;min-height:44px;text-decoration:none;
   transition:transform .09s ease-out,box-shadow .09s ease-out}
-.share .ghost:hover,.share .ghost:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+.share .ghost:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
 .share .ghost:active{transform:none;box-shadow:none}
 .share .said{display:block;font:500 var(--t-xs)/1.6 var(--mono);color:var(--violet-ink);
   min-height:1.6em;margin-top:var(--sp-2)}
@@ -142,7 +142,7 @@ h2.sec{font:800 var(--t-l)/1.2 var(--sans);letter-spacing:-.01em;margin:0 0 var(
   width:100%;text-align:left;background:var(--paper-2);border:2px solid var(--rule);
   padding:13px var(--sp-3);min-height:52px;
   transition:transform .09s ease-out,box-shadow .09s ease-out}
-.opt:hover,.opt:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--violet)}
+.opt:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--violet)}
 .opt:active{transform:none;box-shadow:none}
 .opt[disabled]{opacity:.45;cursor:default;transform:none;box-shadow:none}
 .opt kbd{font:700 var(--t-s)/30px var(--mono);height:30px;text-align:center;
@@ -196,7 +196,7 @@ h2.sec{font:800 var(--t-l)/1.2 var(--sans);letter-spacing:-.01em;margin:0 0 var(
   color:var(--paper);border:2px solid var(--ink);padding:12px var(--sp-4);
   font-weight:800;margin:var(--sp-4) 0 0;min-height:44px;
   transition:transform .09s ease-out,box-shadow .09s ease-out}
-.next:hover,.next:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+.next:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
 .next:active{transform:none;box-shadow:none}
 
 /* ── 結局 ─────────────────────────────────────────────── */
@@ -234,6 +234,14 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:var(--paper-2);
 footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-height:1.7;
   border-top:2px solid var(--rule);margin-top:var(--sp-6);padding-top:var(--sp-3)}
 
+/* 觸控裝置點過之後 :hover 會黏在最後觸碰的座標上。選項每回合在同一個位置重建，
+   那個殘留的亮起狀態就跟著留到下一題。hover 效果只給真的有指標裝置的環境，
+   :focus-visible 不受限制，鍵盤操作照常。 */
+@media (hover:hover){
+  .opt:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--violet)}
+  .next:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+  .share .ghost:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
+}
 @media(max-width:900px){
   .round-grid{grid-template-columns:minmax(0,1fr)}
   .rail{position:static}
@@ -250,7 +258,8 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important}
-  .opt:hover,.opt:focus-visible,.next:hover,.next:focus-visible{transform:none}
+  .opt:hover,.opt:focus-visible,.next:hover,.next:focus-visible,
+  .share .ghost:hover,.share .ghost:focus-visible{transform:none}
   /* animation-duration 被壓成 .01ms 後，forwards 會停在 opacity:0，變化行等於沒出現。
      關掉動畫、維持可見，改由那個 2 秒 timeout 收掉。 */
   .flash.on{animation:none!important;opacity:1}
