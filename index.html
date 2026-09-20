@@ -77,14 +77,17 @@ h2.sec{font:800 var(--t-l)/1.2 var(--sans);letter-spacing:-.01em;margin:0 0 var(
 .share textarea{width:100%;margin:var(--sp-3) 0 0;background:var(--paper);color:var(--ink);
   border:2px solid var(--rule);padding:var(--sp-3);resize:vertical;
   font:var(--t-s)/1.7 var(--sans);border-radius:0}
-.share .row{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin-top:var(--sp-3)}
-.share .ghost{display:inline-flex;align-items:center;gap:var(--sp-2);background:transparent;
-  color:var(--ink);border:2px solid var(--rule);padding:12px var(--sp-4);font-weight:800;
-  min-height:44px;text-decoration:none;
+.share .row{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:stretch;margin-top:var(--sp-3)}
+/* .next 帶 24px 上邊距，放進 flex row 會把主按鈕壓低，跟旁邊的 ghost 對不齊 */
+.share .row>.next{margin:0}
+.share .ghost{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  background:transparent;color:var(--ink);border:2px solid var(--rule);padding:12px var(--sp-4);
+  font-weight:800;min-height:44px;text-decoration:none;
   transition:transform .09s ease-out,box-shadow .09s ease-out}
 .share .ghost:hover,.share .ghost:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--gold)}
 .share .ghost:active{transform:none;box-shadow:none}
-.share .said{font:500 var(--t-xs)/1.6 var(--mono);color:var(--violet-ink)}
+.share .said{display:block;font:500 var(--t-xs)/1.6 var(--mono);color:var(--violet-ink);
+  min-height:1.6em;margin-top:var(--sp-2)}
 .next.big{font-size:var(--t-m);padding:16px var(--sp-5)}
 .rail .tk{border-bottom:2px solid var(--rule);padding-bottom:var(--sp-2);margin-bottom:var(--sp-3)}
 .rail .tk b{display:block;font:800 var(--t-m)/1.3 var(--sans)}
@@ -8453,6 +8456,8 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
     alert: 'm10.29 3.86-8.18 14a2 2 0 0 0 1.71 3h16.36a2 2 0 0 0 1.71-3l-8.18-14a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01',
     dead: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM4.93 4.93l14.14 14.14',
     link: 'M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6',
+    share: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13',
+    copy: 'M20 9h-9a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2zM5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1',
     arrow: 'M5 12h14M13 6l6 6-6 6'
   };
   const TIER_ICON = {good: 'check', ok: 'minus', bad: 'x', kill: 'dead'};
@@ -8858,7 +8863,8 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
   }
 
   // 給 Threads 用的成績單。網址取 location，部署到哪就是哪，不寫死。
-  function shareText() {
+  // 給 Threads 用的成績單。網址取 location，部署到哪就是哪，不寫死。
+  function shareParts() {
     const hits = S.log.filter(l => l.tier === 'bad' || l.tier === 'kill');
     const worst = hits.map(l => l.ref).filter(Boolean).sort((a, b) => b.n - a.n)[0];
     const head = S.dead
@@ -8867,9 +8873,10 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
     const mid = worst
       ? `踩到最大的坑是〈${worst.ch} ${worst.pat}〉${worst.name}——${worst.n} 人踩過。`
       : `12 個月沒踩到任何一個有紀錄的失敗模式。`;
-    const url = location.origin + location.pathname;
-    return `${head}\n${mid}\n\n你撐得到第幾個月？\n${url}`;
+    return {text: `${head}\n${mid}\n\n你撐得到第幾個月？`,
+            url: location.origin + location.pathname};
   }
+  const shareText = () => { const s = shareParts(); return s.text + '\n' + s.url; };
 
   function shareBlock() {
     const wrap = node('div', null, 'slab share');
@@ -8881,13 +8888,34 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
     ta.setAttribute('aria-label', '可複製的成績文字');
     wrap.appendChild(ta);
 
-    const row = node('div', null, 'row');
-    const copy = node('button', null, 'next');
-    copy.type = 'button';
-    copy.appendChild(node('span', '複製'));
     const said = node('span', '', 'said');
     said.setAttribute('role', 'status');
     said.setAttribute('aria-live', 'polite');
+
+    const row = node('div', null, 'row');
+
+    // 主要動作是分享。維持 <a>，所以沒有 JS、中鍵、長按開新分頁都照常；
+    // 有原生分享面板時才攔截 —— 手機上那才是 Threads 的慣例入口。
+    const share = node('a', null, 'next');
+    share.href = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(shareText());
+    share.rel = 'noopener noreferrer';
+    share.target = '_blank';
+    share.appendChild(icon('share', 18));
+    share.appendChild(node('span', '分享'));
+    share.addEventListener('click', e => {
+      if (!navigator.share) return;          // 沒有原生面板就讓連結照常開 Threads
+      e.preventDefault();
+      const s = shareParts();
+      navigator.share({text: s.text, url: s.url})
+        .then(() => { said.textContent = '已開啟分享面板'; })
+        .catch(() => { /* 使用者取消，不做事 */ });
+    });
+    row.appendChild(share);
+
+    const copy = node('button', null, 'ghost');
+    copy.type = 'button';
+    copy.appendChild(icon('copy', 16));
+    copy.appendChild(node('span', '複製文字'));
     copy.addEventListener('click', async () => {
       // file:// 不是 secure context，navigator.clipboard 會丟例外，所以留 execCommand 後路。
       let ok = false;
@@ -8897,15 +8925,8 @@ footer{color:var(--ink-2);font-size:var(--t-xs);font-family:var(--mono);line-hei
     });
     row.appendChild(copy);
 
-    const th = node('a', null, 'ghost');
-    th.href = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(shareText());
-    th.rel = 'noopener noreferrer';
-    th.target = '_blank';
-    th.appendChild(node('span', '到 Threads 發文'));
-    th.appendChild(icon('link', 16));
-    row.appendChild(th);
-    row.appendChild(said);
     wrap.appendChild(row);
+    wrap.appendChild(said);
     return wrap;
   }
 
